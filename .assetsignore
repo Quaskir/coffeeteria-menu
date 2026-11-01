@@ -1,0 +1,9 @@
+# Не выкладывать на сайт (Cloudflare assets = вся папка): генератор и выгрузки продаж iiko
+tools
+.git
+.wrangler
+*.md
+.DS_Store
+.assetsignore
+.gitignore
+wrangler.toml

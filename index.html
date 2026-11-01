@@ -2,401 +2,505 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Coffeeteria — Меню</title>
   <meta name="description" content="Coffeeteria — средиземноморская кухня. Меню: салаты, паста, пицца из дровяной печи, горячие блюда и десерты." />
-  <meta name="theme-color" content="#f0f5fb" />
+  <meta name="theme-color" content="#0B46A8" />
+  <meta name="color-scheme" content="light" />
   <meta property="og:title" content="Coffeeteria — Меню" />
   <meta property="og:description" content="Средиземноморская кухня: салаты, паста, пицца из дровяной печи, горячие блюда и десерты." />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B46A8%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22serif%22>C</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600&family=Forum&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --header-h: 60px;
-      --nav-h: 52px;
-      --blue: #1a5fb4;
-      --blue-light: #3584e4;
-      --blue-pale: #ddeeff;
-      --bg: #f0f5fb;
-      --white: #ffffff;
-      --text: #1a1a2e;
-      --text2: #6b7a99;
-      --border: rgba(26,95,180,0.12);
-      --shadow: rgba(26,95,180,0.1);
+      --aegean: #0B46A8;       /* синий логотипа */
+      --aegean-deep: #08367F;
+      --whitewash: #F7F8F6;    /* побелка, не крем */
+      --ink: #10183A;
+      --stone: #5B6478;
+      --hairline: #DCE1E9;
+      --sun: #F2C14E;          /* только на синем */
+      --bar-h: 52px;
+      --display: 'Forum', 'Times New Roman', serif;
+      --body: 'Commissioner', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      /* меандр: одна линия, тайлы стыкуются без пересечений */
+      --meander-white: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='12' viewBox='0 -1 10 12'%3E%3Cpath d='M0,10 V0 H8 V6 H6 V2 H2 V10 H10' fill='none' stroke='%23fff' stroke-width='0.8' stroke-linecap='square'/%3E%3C/svg%3E");
+      --meander-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='12' viewBox='0 -1 10 12'%3E%3Cpath d='M0,10 V0 H8 V6 H6 V2 H2 V10 H10' fill='none' stroke='%230B46A8' stroke-width='0.8' stroke-linecap='square'/%3E%3C/svg%3E");
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: var(--body);
+      background: var(--whitewash);
+      color: var(--ink);
       min-height: 100vh;
-      color: var(--text);
-      background:
-        radial-gradient(ellipse 70% 50% at 10% 0%, rgba(26,95,180,0.1) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 90% 20%, rgba(53,132,228,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(26,95,180,0.06) 0%, transparent 60%),
-        #f0f5fb;
-      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
     }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--aegean); outline-offset: 2px; border-radius: 6px; }
+    .hero :focus-visible { outline-color: #fff; }
 
-    /* ── ORBS ── */
-    .orb {
-      position: fixed; border-radius: 50%;
-      pointer-events: none; z-index: 0; filter: blur(80px);
+    /* ── HERO: синий как стаканчик Anthora ── */
+    .hero {
+      background: var(--aegean);
+      color: #fff;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 0;
+      text-align: center;
     }
-    .orb-1 { width: 400px; height: 300px; background: rgba(26,95,180,0.08); top: -60px; left: -80px; }
-    .orb-2 { width: 350px; height: 350px; background: rgba(53,132,228,0.06); top: 40%; right: -100px; }
-    .orb-3 { width: 300px; height: 300px; background: rgba(26,95,180,0.05); bottom: -80px; left: 30%; }
-
-    /* ── HEADER ── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(40px) saturate(180%);
-      -webkit-backdrop-filter: blur(40px) saturate(180%);
-      border-bottom: none;
-      box-shadow: 0 4px 24px var(--shadow);
-    }
-    header::after {
-      content: '';
-      display: block;
-      height: 12px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath d='M0,9 L0,0 L15,0 L15,12 L6,12 L6,3 L12,3 L12,9 L18,9' stroke='%231a5fb4' stroke-opacity='0.3' stroke-width='1.5' fill='none' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
-      background-repeat: repeat-x;
-      background-size: 18px 12px;
-    }
-    .header-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: var(--header-h); padding: 0 20px;
-    }
-    .header-logo img { height: 56px; width: auto; display: block; }
-
-    .header-actions { display: flex; align-items: center; gap: 10px; }
-
-    .search-btn {
-      background: rgba(26,95,180,0.08);
-      border: 1px solid rgba(26,95,180,0.15);
-      border-radius: 50%; width: 36px; height: 36px;
-      cursor: pointer; color: var(--blue);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .search-btn:hover { background: rgba(26,95,180,0.14); }
-    .search-btn svg { width: 17px; height: 17px; }
-
-    .lang-switcher {
-      display: flex; background: rgba(26,95,180,0.07);
-      border: 1px solid rgba(26,95,180,0.12);
-      border-radius: 22px; padding: 3px; gap: 1px;
-    }
+    .hero-top { display: flex; justify-content: flex-end; max-width: 640px; margin: 0 auto; }
+    .lang { display: flex; gap: 2px; }
     .lang-btn {
-      border: none; background: none; cursor: pointer;
-      font-size: 11px; font-weight: 700;
-      padding: 4px 10px; border-radius: 18px;
-      color: rgba(26,95,180,0.45); transition: all 0.2s;
-      letter-spacing: 0.04em;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      padding: 8px 8px; color: rgba(255,255,255,0.55);
+      position: relative; transition: color 0.2s;
     }
-    .lang-btn.active {
-      background: var(--blue); color: #fff;
-      box-shadow: 0 2px 8px rgba(26,95,180,0.3);
+    .lang-btn.active { color: #fff; }
+    .lang-btn.active::after {
+      content: ''; position: absolute; left: 8px; right: 8px; bottom: 4px;
+      height: 1.5px; background: var(--sun);
     }
-
-    /* ── SEARCH BAR ── */
-    .search-bar { display: none; padding: 8px 20px 14px; }
-    .search-bar.visible { display: block; }
-    .search-bar input {
-      width: 100%;
-      background: rgba(255,255,255,0.9);
-      border: 1.5px solid rgba(26,95,180,0.2);
-      border-radius: 14px; padding: 11px 18px;
-      font-size: 15px; color: var(--text); outline: none;
-      transition: border-color 0.2s;
+    .logo {
+      width: min(80%, 400px);
+      aspect-ratio: 1415 / 185;
+      margin: 14px auto 0;
+      background: url(logo.png) no-repeat 50.4% 41.3% / 141.3% auto;
+      filter: brightness(0) invert(1);
     }
-    .search-bar input::placeholder { color: var(--text2); }
-    .search-bar input:focus { border-color: var(--blue); }
-
-    /* ── CATEGORY NAV ── */
-    #categoryNav {
-      position: sticky; top: var(--header-h); z-index: 99;
-      background: rgba(240,245,251,0.85);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border-bottom: 1px solid var(--border);
-      overflow-x: auto; white-space: nowrap;
-      height: var(--nav-h); display: flex;
-      align-items: center; padding: 8px 14px 0; gap: 6px;
-      scrollbar-width: none;
+    .kicker {
+      margin-top: 14px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
     }
-    #categoryNav::-webkit-scrollbar { display: none; }
-
-    .cat-btn {
-      border: 1.5px solid rgba(26,95,180,0.15);
-      background: rgba(255,255,255,0.7);
-      cursor: pointer; font-size: 12px; font-weight: 600;
-      padding: 6px 14px; border-radius: 20px;
-      color: var(--text2); white-space: nowrap;
-      transition: all 0.18s; flex-shrink: 0;
-    }
-    .cat-btn.active {
-      background: var(--blue); border-color: var(--blue);
-      color: #fff; box-shadow: 0 3px 10px rgba(26,95,180,0.3);
+    .hero-band {
+      height: 18px; margin: 22px -16px 0;
+      background: var(--meander-white) repeat-x center / 15px 18px;
+      opacity: 0.9;
+      border-bottom: 10px solid var(--aegean);
+      box-sizing: content-box;
     }
 
-    /* ── MAIN ── */
-    main { position: relative; z-index: 1; padding: 12px 0 60px; }
-
-    /* ── CATEGORY SECTION ── */
-    .cat-section { padding: 20px 14px 6px; }
-    .cat-section.hidden { display: none; }
-    .cat-title {
-      font-family: 'Cinzel', serif;
-      font-size: 12px; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 10px;
-      display: flex; align-items: center; gap: 10px;
+    /* ── STICKY BAR ── */
+    .bar {
+      position: sticky; top: 0; z-index: 50;
+      height: var(--bar-h);
+      background: rgba(247,248,246,0.94);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--hairline);
     }
-    .cat-title::before,
-    .cat-title::after {
-      content: '';
-      flex: 1; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(26,95,180,0.25), transparent);
-    }
-
-    /* ── ITEMS LIST ── */
-    .items-list {
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(20px) saturate(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(140%);
-      border: 1px solid var(--border);
-      border-radius: 18px; overflow: hidden;
-      box-shadow: 0 2px 16px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .item-card {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      padding: 15px 18px; gap: 14px;
-      border-bottom: 1px solid rgba(26,95,180,0.07);
-      transition: background 0.15s;
-    }
-    .item-card:last-child { border-bottom: none; }
-    .item-card:active { background: rgba(26,95,180,0.04); }
-    .item-card.hidden { display: none; }
-
-    .item-card.has-photo { flex-direction: column; align-items: stretch; padding: 0; gap: 0; }
-    .item-photo { width: 100%; height: 200px; object-fit: cover; display: block; background: rgba(26,95,180,0.06); }
-    .item-card.has-photo .item-card-body {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 12px; padding: 13px 16px;
-    }
-
-    .item-info { flex: 1; min-width: 0; }
-    .item-name { font-size: 15px; font-weight: 400; color: var(--text); line-height: 1.35; }
-    .item-desc { font-size: 12px; color: var(--text2); line-height: 1.4; margin-top: 3px; }
-    .item-price {
-      font-size: 14px; font-weight: 600; color: var(--blue);
-      white-space: nowrap; flex-shrink: 0;
-      background: rgba(26,95,180,0.08);
-      border: 1px solid rgba(26,95,180,0.15);
-      border-radius: 10px; padding: 3px 10px;
-    }
-
-    /* ── ITEM RIGHT (price + add) ── */
-    .item-right { display: flex; flex-direction: row; align-items: center; gap: 10px; flex-shrink: 0; }
-
-    .add-btn {
-      width: 30px; height: 30px; border-radius: 50%;
-      background: var(--blue); border: none; cursor: pointer;
-      color: #fff; font-size: 20px; line-height: 1;
+    .bar-inner { height: 100%; max-width: 640px; margin: 0 auto; display: flex; align-items: stretch; }
+    .icon-btn {
+      flex-shrink: 0; width: 48px;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 8px rgba(26,95,180,0.35);
-      transition: background 0.15s, transform 0.1s; flex-shrink: 0;
-      -webkit-tap-highlight-color: transparent;
+      color: var(--aegean);
     }
-    .add-btn:active { transform: scale(0.88); }
-    .add-btn.in-cart { background: #3a9e5f; }
+    .icon-btn svg { width: 19px; height: 19px; }
+    .search-toggle { border-right: 1px solid var(--hairline); }
+    .all-toggle { border-left: 1px solid var(--hairline); }
+    .bar.searching .all-toggle { display: none; }
 
-    /* ── CART FAB ── */
-    .cart-fab {
-      position: fixed; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); right: 20px; z-index: 200;
-      background: var(--blue); border: none;
-      border-radius: 50px; padding: 0 20px 0 16px; height: 52px;
-      display: none; align-items: center; gap: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(26,95,180,0.45);
-      transition: transform 0.2s;
-      -webkit-tap-highlight-color: transparent;
+    .tabs {
+      flex: 1; display: flex; overflow-x: auto; scrollbar-width: none;
+      padding: 0 22px 0 6px;
+      /* затухание справа — видно, что ленту можно листать */
+      -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+      mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
     }
-    .cart-fab.visible { display: flex; }
-    .cart-fab:active { transform: scale(0.96); }
-    .cart-fab-icon { font-size: 20px; }
-    .cart-fab-info { display: flex; flex-direction: column; align-items: flex-start; }
-    .cart-fab-count { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1; }
-    .cart-fab-total { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0; white-space: nowrap;
+      padding: 0 10px; font-size: 14px; font-weight: 500;
+      color: var(--stone); position: relative;
+      transition: color 0.2s;
+    }
+    .tab::after {
+      content: ''; position: absolute; left: 10px; right: 10px; bottom: -1px;
+      height: 2px; background: var(--aegean);
+      transform: scaleX(0); transition: transform 0.25s ease;
+    }
+    .tab.active { color: var(--aegean); }
+    .tab.active::after { transform: scaleX(1); }
 
-    /* ── CART DRAWER ── */
-    .cart-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-      z-index: 300; opacity: 0; pointer-events: none;
-      transition: opacity 0.3s;
+    .search { flex: 1; display: none; align-items: center; }
+    .search input {
+      flex: 1; min-width: 0; height: 100%;
+      border: none; background: none; outline: none;
+      font: inherit; font-size: 16px; color: var(--ink);
+      padding: 0 4px 0 14px;
     }
-    .cart-overlay.open { opacity: 1; pointer-events: auto; }
+    .search input::placeholder { color: var(--stone); }
+    .search input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+    .bar.searching .tabs, .bar.searching .search-toggle { display: none; }
+    .bar.searching .search { display: flex; }
 
-    .cart-drawer {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 301;
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(40px);
-      border-radius: 20px 20px 0 0;
-      border-top: 1px solid var(--border);
-      max-height: 80vh; display: flex; flex-direction: column;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
-      box-shadow: 0 -8px 40px rgba(26,95,180,0.12);
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-    .cart-drawer.open { transform: translateY(0); }
+    /* ── MENU ── */
+    main { max-width: 640px; margin: 0 auto; padding: 8px 16px 0; }
 
-    .cart-handle {
-      width: 36px; height: 4px;
-      background: rgba(0,0,0,0.12);
-      border-radius: 2px; margin: 12px auto 0; flex-shrink: 0;
+    .cat { padding-top: 36px; scroll-margin-top: calc(var(--bar-h) + 4px); }
+    .cat.hidden { display: none; }
+    .cat-greek {
+      display: block;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.26em;
+      color: var(--aegean); opacity: 0.7;
     }
-    .cart-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px 12px; flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
+    .cat-name {
+      font-family: var(--display); font-weight: 400;
+      font-size: 36px; line-height: 1.05; letter-spacing: 0.01em;
+      color: var(--aegean);
+      margin-top: 6px; padding-bottom: 14px;
+      border-bottom: 1.5px solid var(--aegean);
     }
-    .cart-title { font-size: 16px; font-weight: 700; color: var(--text); }
-    .cart-clear {
-      font-size: 13px; color: var(--text2);
-      background: none; border: none; cursor: pointer; padding: 4px 8px;
+
+    .dishes { list-style: none; }
+    .dish { padding: 16px 0 15px; border-bottom: 1px solid var(--hairline); }
+    .dish:last-child { border-bottom: none; }
+    .dish.hidden { display: none; }
+    .dish.with-photo { padding-top: 22px; }
+    .dish-photo {
+      display: block; width: 100%; aspect-ratio: 4 / 3; margin-bottom: 14px;
+      border-radius: 16px; overflow: hidden; background: var(--hairline);
     }
-    .cart-items { overflow-y: auto; flex: 1; padding: 8px 0; }
-    .cart-row {
+    .dish-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .greek-tag {
+      display: inline-flex; align-items: center; gap: 6px; margin-bottom: 6px;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--aegean);
+    }
+    .greek-tag svg { width: 10px; height: 10px; flex-shrink: 0; }
+    .dish-line { display: flex; align-items: flex-end; gap: 0; }
+    .dish-name { flex: 0 1 auto; font-size: 16px; font-weight: 500; line-height: 1.35; }
+    .leader {
+      flex: 1 1 16px; min-width: 16px;
+      margin: 0 8px 6px;
+      border-bottom: 1.5px dotted #B4BCCB;
+    }
+    .dish-price {
+      flex-shrink: 0;
+      font-size: 16px; font-weight: 600;
+      font-variant-numeric: tabular-nums; color: var(--ink);
+      line-height: 1.35;
+    }
+    .dish-price small { font-size: 13px; font-weight: 500; color: var(--stone); margin-left: 2px; }
+    .dish-desc {
+      margin-top: 5px; padding-right: 48px;
+      font-size: 13.5px; line-height: 1.5; color: var(--stone);
+    }
+    .add {
+      flex-shrink: 0; position: relative;
+      width: 32px; height: 32px; margin: 0 0 -4px 12px;
+      border-radius: 50%; border: 1.5px solid var(--aegean);
+      color: var(--aegean); font-size: 15px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      font-variant-numeric: tabular-nums;
+      transition: background 0.15s, color 0.15s;
+    }
+    .add::before { content: ''; position: absolute; inset: -8px; } /* зона нажатия 48px */
+    .add svg { width: 14px; height: 14px; }
+    .add.in-cart { background: var(--aegean); color: #fff; }
+    .add.pop { animation: pop 0.28s ease; }
+    @keyframes pop { 40% { transform: scale(1.18); } }
+
+    .empty { display: none; text-align: center; padding: 72px 20px 24px; }
+    .empty.visible { display: block; }
+    .empty-title { font-family: var(--display); font-size: 28px; color: var(--aegean); }
+    .empty-text { margin-top: 8px; font-size: 14px; color: var(--stone); }
+
+    /* ── FOOTER ── */
+    footer { max-width: 640px; margin: 48px auto 0; padding: 0 16px 140px; text-align: center; }
+    .footer-band { height: 18px; background: var(--meander-blue) repeat-x center / 15px 18px; opacity: 0.35; }
+    .footer-greek { margin-top: 28px; font-family: var(--display); font-size: 30px; color: var(--aegean); }
+    .footer-text { margin-top: 4px; font-size: 13px; color: var(--stone); }
+
+    /* ── CART BAR ── */
+    .cart-bar {
+      position: fixed; z-index: 60;
+      left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      max-width: 608px; margin: 0 auto;
+      height: 56px; padding: 0 18px 0 12px;
       display: flex; align-items: center; gap: 12px;
-      padding: 10px 20px;
-      border-bottom: 1px solid var(--border);
+      background: var(--aegean); color: #fff; border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(8,54,127,0.28);
+      transform: translateY(calc(100% + 40px)); transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
     }
-    .cart-row:last-child { border-bottom: none; }
-    .cart-row-info { flex: 1; min-width: 0; }
-    .cart-row-name { font-size: 14px; color: var(--text); line-height: 1.3; }
-    .cart-row-price { font-size: 13px; color: var(--text2); margin-top: 2px; }
-    .cart-qty { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .cart-bar.visible { transform: none; }
+    .cart-bar:active { background: var(--aegean-deep); }
+    .cart-count {
+      min-width: 30px; height: 30px; padding: 0 8px; border-radius: 15px;
+      background: var(--sun); color: var(--ink);
+      font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-label { flex: 1; text-align: left; font-size: 15px; font-weight: 500; }
+    .cart-sum { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    /* ── CART SHEET ── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 70; background: rgba(16,24,58,0.4);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .sheet {
+      position: fixed; z-index: 71; left: 0; right: 0; bottom: 0;
+      max-width: 640px; margin: 0 auto; max-height: 82vh;
+      display: flex; flex-direction: column;
+      background: var(--whitewash); border-radius: 20px 20px 0 0;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+    }
+    .sheet.open { transform: none; }
+    .sheet-band { height: 10px; border-radius: 20px 20px 0 0; background: var(--aegean); }
+    .sheet-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 20px 20px 12px; border-bottom: 1px solid var(--hairline);
+    }
+    .sheet-title { font-family: var(--display); font-size: 28px; font-weight: 400; color: var(--aegean); }
+    .sheet-clear { font-size: 14px; color: var(--stone); padding: 6px 0 6px 12px; }
+    .sheet-items { overflow-y: auto; flex: 1; padding: 0 20px; }
+    .row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+    .row:last-child { border-bottom: none; }
+    .row-info { flex: 1; min-width: 0; }
+    .row-name { font-size: 15px; font-weight: 500; line-height: 1.3; }
+    .row-price { margin-top: 2px; font-size: 13px; color: var(--stone); font-variant-numeric: tabular-nums; }
+    .qty { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
     .qty-btn {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1px solid rgba(26,95,180,0.2);
-      background: rgba(26,95,180,0.06);
-      color: var(--blue); font-size: 16px;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s;
-      -webkit-tap-highlight-color: transparent;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1.5px solid var(--hairline); color: var(--aegean); font-size: 18px; line-height: 1;
     }
-    .qty-btn:active { background: rgba(26,95,180,0.15); }
-    .qty-num { font-size: 15px; font-weight: 600; min-width: 20px; text-align: center; color: var(--text); }
-    .cart-footer {
-      padding: 16px 20px 28px; flex-shrink: 0;
-      border-top: 1px solid var(--border);
+    .qty-btn:active { background: var(--hairline); }
+    .qty-num { min-width: 24px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .sheet-foot { padding: 16px 20px 20px; border-top: 1px solid var(--hairline); }
+    .total { display: flex; align-items: baseline; justify-content: space-between; }
+    .total-label { font-size: 14px; color: var(--stone); }
+    .total-sum { font-size: 24px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .total-note { margin-top: 4px; font-size: 12.5px; color: var(--stone); text-align: right; }
+    .show-btn {
+      width: 100%; margin-top: 16px; height: 54px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--aegean); color: #fff; font-size: 16px; font-weight: 600;
     }
-    .cart-total-row { display: flex; justify-content: space-between; align-items: center; }
-    .cart-total-label { font-size: 14px; color: var(--text2); }
-    .cart-total-amount { font-size: 22px; font-weight: 700; color: var(--blue); }
-    .cart-send {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; margin-top: 14px;
-      background: #25d366; border: none; border-radius: 14px;
-      padding: 14px; font-size: 15px; font-weight: 700; color: #fff;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
-      transition: transform 0.15s;
-      -webkit-tap-highlight-color: transparent;
+    .show-btn:active { background: var(--aegean-deep); }
+    .show-btn svg { width: 20px; height: 20px; }
+    .show-hint { margin-top: 10px; font-size: 13px; color: var(--stone); text-align: center; }
+
+    /* ── WAITER SCREEN: всё по-русски, крупно ── */
+    .waiter {
+      position: fixed; inset: 0; z-index: 90; overflow-y: auto;
+      background: #fff; color: var(--ink);
+      transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
     }
-    .cart-send:active { transform: scale(0.97); }
+    .waiter.open { transform: none; }
+    .waiter-band { height: calc(10px + env(safe-area-inset-top, 0px)); background: var(--aegean); }
+    .waiter-inner { max-width: 640px; margin: 0 auto; padding: 8px 20px calc(28px + env(safe-area-inset-bottom, 0px)); }
+    .waiter-back {
+      display: inline-flex; align-items: center; gap: 4px; height: 44px; margin-left: -6px; padding: 0 6px;
+      font-size: 15px; font-weight: 500; color: var(--aegean);
+    }
+    .waiter-back svg { width: 18px; height: 18px; }
+    .waiter-title { margin-top: 6px; font-family: var(--display); font-size: 36px; font-weight: 400; color: var(--aegean); }
+    .waiter-sub { margin-top: 2px; font-size: 15px; color: var(--stone); }
+    .waiter-group {
+      margin-top: 22px; padding-bottom: 6px; border-bottom: 1.5px solid var(--aegean);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--aegean);
+    }
+    .waiter-row { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+    .waiter-qty { flex-shrink: 0; min-width: 40px; font-size: 22px; font-weight: 600; color: var(--aegean); font-variant-numeric: tabular-nums; }
+    .waiter-name { flex: 1; font-size: 20px; font-weight: 500; line-height: 1.3; }
+    .waiter-sum { flex-shrink: 0; font-size: 17px; font-weight: 500; color: var(--stone); font-variant-numeric: tabular-nums; }
+    .waiter-total { display: flex; align-items: baseline; justify-content: space-between; margin-top: 22px; }
+    .waiter-total-label { font-size: 18px; color: var(--stone); }
+    .waiter-total-sum { font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .waiter-note { margin-top: 4px; font-size: 14px; color: var(--stone); text-align: right; }
+
+    /* ── ALL SECTIONS SHEET ── */
+    .nav-sheet {
+      position: fixed; z-index: 71; left: 0; right: 0; bottom: 0;
+      max-width: 640px; margin: 0 auto; max-height: 85vh; overflow-y: auto;
+      background: var(--whitewash); border-radius: 20px 20px 0 0;
+      padding: 0 16px calc(20px + env(safe-area-inset-bottom, 0px));
+      transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+    }
+    .nav-sheet.open { transform: none; }
+    .nav-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0 14px;
+    }
+    .nav-title { font-family: var(--display); font-size: 28px; font-weight: 400; color: var(--aegean); }
+    .nav-close { width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center; color: var(--stone); }
+    .nav-close svg { width: 20px; height: 20px; }
+    .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .nav-heading {
+      grid-column: 1 / -1; margin: 10px 0 0; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--aegean);
+    }
+    .nav-heading:first-child { margin-top: 0; }
+    .nav-item {
+      text-align: left; min-height: 72px; padding: 12px 14px;
+      border-radius: 14px; background: #fff; border: 1px solid var(--hairline);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+    }
+    .nav-item-name { font-size: 15px; font-weight: 600; line-height: 1.25; color: var(--ink); }
+    .nav-item-count { font-size: 12.5px; color: var(--stone); }
+    .nav-item.active { background: var(--aegean); border-color: var(--aegean); }
+    .nav-item.active .nav-item-name { color: #fff; }
+    .nav-item.active .nav-item-count { color: rgba(255,255,255,0.75); }
+
+    /* ── PHOTO VIEWER ── */
+    .viewer {
+      position: fixed; inset: 0; z-index: 80;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: calc(56px + env(safe-area-inset-top, 0px)) 16px calc(24px + env(safe-area-inset-bottom, 0px));
+      background: rgba(10,18,44,0.97); color: #fff; text-align: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .viewer.open { opacity: 1; pointer-events: auto; }
+    .viewer-close {
+      position: absolute; top: calc(6px + env(safe-area-inset-top, 0px)); right: 6px;
+      width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #fff;
+    }
+    .viewer-close svg { width: 22px; height: 22px; }
+    .viewer img {
+      display: block; max-width: min(100%, 560px); max-height: 60vh;
+      border-radius: 16px; object-fit: contain;
+      transform: scale(0.96); transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+    }
+    .viewer.open img { transform: none; }
+    .viewer-name { margin-top: 20px; font-family: var(--display); font-size: 28px; line-height: 1.15; max-width: 520px; }
+    .viewer-price { margin-top: 6px; font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.75); font-variant-numeric: tabular-nums; }
+    .viewer-add {
+      margin-top: 20px; height: 50px; padding: 0 28px; border-radius: 14px;
+      background: #fff; color: var(--aegean); font-size: 15px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .viewer-add .cnt {
+      min-width: 24px; height: 24px; padding: 0 7px; border-radius: 12px;
+      background: var(--sun); color: var(--ink); font-size: 13px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .viewer :focus-visible { outline-color: #fff; }
+    .viewer:focus { outline: none; }
 
     @media (min-width: 640px) {
-      .cart-drawer { max-width: 480px; left: 50%; transform: translateX(-50%) translateY(100%); right: auto; }
-      .cart-drawer.open { transform: translateX(-50%) translateY(0); }
+      .cat-name { font-size: 42px; }
+      .hero-band { margin-top: 28px; }
     }
-
-    /* ── EMPTY STATE ── */
-    .empty-state { display: none; text-align: center; padding: 80px 20px; color: var(--text2); }
-    .empty-state.visible { display: block; }
-    .empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
-    .empty-state-text { font-size: 15px; font-weight: 500; }
-
-    /* ── DESKTOP ── */
-    @media (min-width: 640px) {
-      .cat-section { padding: 24px 24px 8px; max-width: 680px; margin: 0 auto; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
 <body>
 
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
-
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <div class="header-logo"><img src="logo.png" alt="Coffeeteria"></div>
-    <div class="header-actions">
-      <button class="search-btn" id="searchToggle" aria-label="Поиск">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </button>
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="ru">РУ</button>
-        <button class="lang-btn" data-lang="kz">ҚЗ</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-      </div>
+<header class="hero">
+  <div class="hero-top">
+    <div class="lang" role="group" aria-label="Язык">
+      <button class="lang-btn" data-lang="ru">РУ</button>
+      <button class="lang-btn" data-lang="kz">ҚЗ</button>
+      <button class="lang-btn" data-lang="en">EN</button>
     </div>
   </div>
-  <div class="search-bar" id="searchBar">
-    <input type="text" id="searchInput" placeholder="Поиск по меню..." autocomplete="off" />
-  </div>
+  <h1 class="logo" role="img" aria-label="Coffeeteria"></h1>
+  <p class="kicker" data-t="kicker">Средиземноморская кухня</p>
+  <div class="hero-band" aria-hidden="true"></div>
 </header>
 
-<!-- CATEGORY NAV -->
-<nav id="categoryNav"></nav>
+<nav class="bar" id="bar">
+  <div class="bar-inner">
+    <button class="icon-btn search-toggle" id="searchOpen" aria-label="Поиск">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    </button>
+    <div class="tabs" id="tabs"></div>
+    <button class="icon-btn all-toggle" id="navOpen" aria-label="Все разделы" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>
+    </button>
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Поиск по меню" autocomplete="off" enterkeyhint="search" />
+      <button class="icon-btn" id="searchClose" aria-label="Закрыть поиск">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
 
-<!-- MAIN -->
-<main id="mainContent">
-  <div class="empty-state" id="emptyState">
-    <div class="empty-state-icon">☕</div>
-    <div class="empty-state-text">Ничего не найдено</div>
+<main id="menu">
+  <div class="empty" id="empty">
+    <div class="empty-title" data-t="emptyTitle">Ничего не найдено</div>
+    <div class="empty-text" data-t="emptyText">Попробуйте другое слово или название на английском</div>
   </div>
 </main>
 
-<!-- CART FAB -->
-<button class="cart-fab" id="cartFab" onclick="openCart()">
-  <span class="cart-fab-icon">🛒</span>
-  <div class="cart-fab-info">
-    <span class="cart-fab-count" id="cartFabCount">0 позиций</span>
-    <span class="cart-fab-total" id="cartFabTotal">0 тг</span>
-  </div>
+<footer>
+  <div class="footer-band" aria-hidden="true"></div>
+  <div class="footer-greek" lang="el">Καλή όρεξη</div>
+  <div class="footer-text" data-t="bon">Приятного аппетита</div>
+</footer>
+
+<button class="cart-bar" id="cartBar">
+  <span class="cart-count" id="cartCount">0</span>
+  <span class="cart-label" data-t="selected">Выбранное</span>
+  <span class="cart-sum" id="cartSum">0 ₸</span>
 </button>
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-handle"></div>
-  <div class="cart-header">
-    <span class="cart-title">Выбранное</span>
-    <button class="cart-clear" onclick="clearCart()">Очистить</button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-footer">
-    <div class="cart-total-row">
-      <span class="cart-total-label">Итого</span>
-      <span class="cart-total-amount" id="cartTotalAmount">0 тг</span>
-    </div>
-    <button class="cart-send" onclick="sendToWhatsApp()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      <span>Отправить заказ в WhatsApp</span>
+<div class="viewer" id="viewer" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="viewerName">
+  <button class="viewer-close" id="viewerClose" aria-label="Закрыть">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <img id="viewerImg" alt="">
+  <div class="viewer-name" id="viewerName"></div>
+  <div class="viewer-price" id="viewerPrice"></div>
+  <button class="viewer-add" id="viewerAdd"></button>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="nav-sheet" id="navSheet" role="dialog" aria-modal="true" aria-labelledby="navTitle">
+  <div class="nav-head">
+    <h2 class="nav-title" id="navTitle" data-t="sections">Разделы меню</h2>
+    <button class="nav-close" id="navClose" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
+  </div>
+  <div class="nav-grid" id="navGrid"></div>
+</div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-band" aria-hidden="true"></div>
+  <div class="sheet-head">
+    <h2 class="sheet-title" id="sheetTitle" data-t="selected">Выбранное</h2>
+    <button class="sheet-clear" id="clearCart" data-t="clear">Очистить</button>
+  </div>
+  <div class="sheet-items" id="sheetItems"></div>
+  <div class="sheet-foot">
+    <div class="total">
+      <span class="total-label" data-t="total">Итого</span>
+      <span class="total-sum" id="totalSum">0 ₸</span>
+    </div>
+    <div class="total-note" data-t="service">Без учёта обслуживания 15%</div>
+    <button class="show-btn" id="showWaiter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18.5h4"/></svg>
+      <span data-t="show">Показать официанту</span>
+    </button>
+    <p class="show-hint" data-t="hint">Официант оформит заказ по этому списку</p>
+  </div>
+</div>
+
+<!-- экран для официанта: всегда по-русски -->
+<div class="waiter" id="waiter" role="dialog" aria-modal="true" aria-labelledby="waiterTitle" lang="ru">
+  <div class="waiter-band" aria-hidden="true"></div>
+  <div class="waiter-inner">
+    <button class="waiter-back" id="waiterBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      <span data-t="back">Назад</span>
+    </button>
+    <h2 class="waiter-title" id="waiterTitle">Заказ</h2>
+    <div class="waiter-sub" id="waiterSub"></div>
+    <div id="waiterList"></div>
+    <div class="waiter-total">
+      <span class="waiter-total-label">Итого</span>
+      <span class="waiter-total-sum" id="waiterTotal"></span>
+    </div>
+    <div class="waiter-note">обслуживание 15% начисляется отдельно</div>
   </div>
 </div>
 
@@ -406,190 +510,533 @@
 // ─────────────────────────────
 const menuData = [
   {
-    id: 'salads',
-    name: 'Салаты', name_kz: 'Салаттар', name_en: 'Salads',
+    id: 'breakfast',
+    name: 'Завтраки', name_kz: 'Таңғы ас', name_en: 'Breakfast',
     items: [
-      { name: 'Греческий салат', name_kz: 'Грек салаты', name_en: 'Greek salad', desc: 'Сочные помидоры, хрустящие огурцы, болгарский перец, маслины, оливки, красный лук и сыр Салакис. Заправляется отборным оливковым маслом и свежевыжатым лимонным соком.', price: 2990 },
-      { name: 'Хрустящий салат с баклажанами', name_kz: 'Баклажанды хрустящий салат', name_en: 'Crispy salad with eggplant', desc: 'Обжаренные баклажаны, сочные помидоры и микс салатов, дополненные нежным греческим йогуртом, сливочным сыром Креметте и греческими орехами.', price: 2690 },
-      { name: 'Салат по-грузински', name_kz: 'Грузинша салат', name_en: 'Georgian salad', desc: 'Хрустящие огурцы, сочные помидоры, красный лук и зёрна граната, дополненные ароматной ореховой заправкой.', price: 2390 },
-      { name: 'Салат с запеченным лососем', name_kz: 'Пісірілген лосось салаты', name_en: 'Roasted salmon salad', desc: 'Нежный лосось, запечённый до сочной текстуры, подаётся с миксом свежей зелени, черри, огурцом и тонкими миндальными спайсами.', price: 3290 },
-      { name: 'Салат с говяжьей вырезкой и соусом винегрет', name_kz: 'Сиыр еті салаты винегрет соуспен', name_en: 'Beef tenderloin salad with vinaigrette', desc: 'Сочные ломтики говяжьей вырезки, маринованные корнишоны, помидоры черри, микс свежих салатов. Подаётся с соусом винегрет.', price: 3790 },
-      { name: 'Ачечили с курицей', name_kz: 'Тауықты ачечили', name_en: 'Acheachili with chicken', desc: 'Сочное куриное филе с болгарским перцем, микс салатов, черри и кедровые орехи. Заправляется фирменной медово-горчичной заправкой.', price: 3090 },
-      { name: 'Салат турецкий со свеклой', name_kz: 'Қызылшалы түрік салаты', name_en: 'Turkish salad with beetroot', desc: 'Микс салатов, свёкла, нежный греческий йогурт, кедровые орехи и ягодный джем — гармоничное сочетание свежести и лёгкой сладости.', price: 2290 },
-      { name: 'Салат «Томаты в Сливочной Ноте»', name_kz: '«Кілегейлі Томаттар» салаты', name_en: 'Salad «Tomatoes in Cream Note»', desc: 'Свежие спелые томаты в сочетании с нежным сливочным сыром и ароматной рукколой.', price: 2990 },
-      { name: 'Салат с куриным филе и сыром салакис', name_kz: 'Тауық филесі мен салакис ірімшігі салаты', name_en: 'Chicken salad with Salakis cheese', desc: 'Нежное куриное филе в сопровождении свежих садовых листьев, овощей и воздушного сыра Салакис.', price: 2790 },
-      { name: 'Салат с креветками', name_kz: 'Креветка салаты', name_en: 'Shrimp salad', desc: 'Пряная руккола с креветками, сладкими черри и свежими огурцами, украшенная рубиновыми зёрнами граната и мягким сливочным Салакисом.', price: 3490 },
+      { name: 'Английский завтрак', name_kz: 'Ағылшынша таңғы ас', name_en: 'English breakfast', price: 2190 },
+      { name: 'Турецкий завтрак Стамбул', name_kz: '«Стамбул» түрік таңғы асы', name_en: 'Istanbul Turkish breakfast', price: 2790 },
+      { name: 'Грузинский завтрак Тбилиси', name_kz: '«Тбилиси» грузин таңғы асы', name_en: 'Tbilisi Georgian breakfast', price: 2890 },
+      { name: 'Завтрак Греческое утро', name_kz: '«Грек таңы» таңғы асы', name_en: 'Greek Morning breakfast', price: 3290 },
+      { name: 'Завтрак с сыром халуми, нутом в томатном соусе', name_kz: 'Халуми ірімшігі мен томат тұздығындағы ноқат қосылған таңғы ас', name_en: 'Breakfast with halloumi and chickpeas in tomato sauce', price: 3590 },
+      { name: 'Сырники из фермерского творога с бельгийским шоколадом', name_kz: 'Бельгия шоколады қосылған фермерлік сүзбе сырниктері', name_en: 'Farmer cottage cheese pancakes with Belgian chocolate', price: 2790 },
+      { name: 'Шакшука с сыром лабне', name_kz: 'Лабне ірімшігімен шакшука', name_en: 'Shakshuka with labneh', price: 2990 },
+      { name: 'Овсяная каша с ягодами и карамелью орехов', name_kz: 'Жидек пен карамельденген жаңғақ қосылған сұлы ботқасы', name_en: 'Oatmeal with berries and caramelised nuts', price: 1790 },
+      { name: 'Брускетта с сёмгой и авокадо', name_kz: 'Албырт пен авокадо қосылған брускетта', name_en: 'Bruschetta with salmon and avocado', price: 3190 },
+      { name: 'Мини-блины с воздушным кремом и ягодами', name_kz: 'Ауадай крем мен жидек қосылған шағын құймақтар', name_en: 'Mini pancakes with whipped cream and berries', price: 2190 },
+      { name: 'Масло сливочное 50 г', name_kz: 'Сары май 50 г', name_en: 'Butter 50 g', price: 690 },
+      { name: 'Шакшука с креветками и сыром лабне', name_kz: 'Креветка мен лабне ірімшігі қосылған шакшука', name_en: 'Shakshuka with shrimp and labneh', price: 3290 },
+      { name: 'Шпинатный блинчик с сёмгой и красной икрой', name_kz: 'Албырт пен қызыл уылдырық қосылған шпинат құймағы', name_en: 'Spinach crêpe with salmon and red caviar', price: 3290 },
+      { name: 'Рисовая каша с карамелизированным бананом', name_kz: 'Карамельденген банан қосылған күріш ботқасы', name_en: 'Rice porridge with caramelised banana', price: 1790 },
+      { name: 'Панкейки с двумя видами греческого соуса', name_kz: 'Екі түрлі грек тұздығымен панкейктер', name_en: 'Pancakes with two Greek sauces', price: 2190 },
+      { name: 'Большой греческий завтрак на две персоны', name_kz: 'Екі адамға арналған үлкен грек таңғы асы', name_en: 'Big Greek breakfast for two', price: 7690 },
+      { name: 'Крок мадам', name_kz: 'Крок-мадам', name_en: 'Croque madame', price: 2690 },
+      { name: 'Боул с творогом', name_kz: 'Сүзбе боулы', name_en: 'Cottage cheese bowl', price: 1990 },
+      { name: 'Сэндвич с курицей', name_kz: 'Тауық еті қосылған сэндвич', name_en: 'Chicken sandwich', price: 1990 },
     ]
   },
   {
-    id: 'hot_starters',
-    name: 'Горячие закуски', name_kz: 'Ыстық тағамдар', name_en: 'Hot Starters',
+    id: 'salads',
+    name: 'Салаты', name_kz: 'Салаттар', name_en: 'Salads',
     items: [
-      { name: 'Ассорти Гирос', name_kz: 'Гирос ассортисі', name_en: 'Gyros assortment', desc: 'Нежная курица сочная говядина, свежие овощи в мягкой пите, дополненной фирменными соусами и золотистый картофель фри.', price: 4990 },
-      { name: 'Рулет из лосося', name_kz: 'Лосось рулеті', name_en: 'Salmon roll', desc: 'Нежное филе свежей сёмги, завернутое в хрустящее тесто с мягким сливочным сыром. Подаётся с ароматным сливочным соусом и долькой лимона.', price: 4990 },
-      { name: 'Мидии в соусе том-ям', name_kz: 'Мидия том-ям соусында', name_en: 'Mussels in tom yum sauce', desc: 'Сочные мидии, тушённые в насыщенном соусе том-ям на основе традиционной пасты и ароматного бульона. Подаются с хрустящей чиабаттой.', price: 3390 },
-      { name: 'Креветки в греческом стиле', name_kz: 'Грек стиліндегі креветка', name_en: 'Shrimp Greek style', desc: 'Обжаренные тигровые креветки с томатами, болгарским перцем светофор, подается с обжаренным хлебом чиабатта и греческим сыром.', price: 5490 },
+      { name: 'Хрустящий салат с баклажаном', name_kz: 'Баклажанды қытырлақ салат', name_en: 'Crispy eggplant salad', desc: 'Обжаренные баклажаны, сочные помидоры и микс салатов, дополненные нежным греческим йогуртом, сливочным сыром Креметте и грецкими орехами.', desc_kz: 'Қуырылған баклажан, шырынды қызанақ және салат жапырақтары, нәзік грек йогурты, кілегейлі Креметте ірімшігі және грек жаңғағымен.', desc_en: 'Fried eggplant, juicy tomatoes and mixed salad leaves with creamy Greek yogurt, Cremette cream cheese and walnuts.', price: 2690 },
+      { name: 'Греческий салат', name_kz: 'Грек салаты', name_en: 'Greek salad', desc: 'Спелые сочные томаты, хрустящие огурцы, сладкий болгарский перец, красный лук, маслины и оливки с нежным сыром «Салакис». Дополняется оливковым маслом первого отжима и свежевыжатым лимонным соком.', desc_kz: 'Піскен шырынды томаттар, қытырлақ қияр, тәтті болгар бұрышы, қызыл пияз, қара және жасыл зәйтүн, нәзік «Салакис» ірімшігі. Алғашқы сығымдағы зәйтүн майы мен жаңа сығылған лимон шырыны қосылады.', desc_en: 'Ripe juicy tomatoes, crisp cucumbers, sweet bell pepper, red onion, black and green olives with soft Salakis cheese. Dressed with extra virgin olive oil and freshly squeezed lemon juice.', price: 2990 },
+      { name: 'Салат с креветками', name_kz: 'Креветка салаты', name_en: 'Shrimp salad', desc: 'Пряная руккола с креветками, сладкими черри и свежими огурцами, украшенная рубиновыми зёрнами граната и мягким сливочным Салакисом.', desc_kz: 'Креветкалы ащылау руккола, тәтті черри және балғын қияр, лағылдай анар дәндері мен жұмсақ кілегейлі Салакиспен безендірілген.', desc_en: 'Peppery arugula with shrimp, sweet cherry tomatoes and fresh cucumbers, topped with ruby pomegranate seeds and soft, creamy Salakis.', price: 3490 },
+      { name: 'Салат турецкий со свеклой', name_kz: 'Қызылшалы түрік салаты', name_en: 'Turkish salad with beetroot', desc: 'Микс салатов, свёкла, нежный греческий йогурт, кедровые орехи и ягодный джем — гармоничное сочетание свежести и лёгкой сладости.', desc_kz: 'Салат жапырақтары, қызылша, нәзік грек йогурты, самырсын жаңғағы және жидек джемі — балғындық пен жеңіл тәттіліктің үйлесімі.', desc_en: 'Mixed salad leaves, beetroot, creamy Greek yogurt, pine nuts and berry jam — fresh, with a light sweetness.', price: 2290 },
+      { name: 'Салат с говяжьей вырезкой и соусом винегрет', name_kz: 'Сиыр еті салаты винегрет соуспен', name_en: 'Beef tenderloin salad with vinaigrette', desc: 'Сочные ломтики говяжьей вырезки, маринованные корнишоны, помидоры черри, микс свежих салатов. Подаётся с соусом винегрет.', desc_kz: 'Сиыр етінің шырынды тілімдері, маринадталған корнишондар, черри қызанақ және балғын салат жапырақтары. Винегрет тұздығымен беріледі.', desc_en: 'Juicy slices of beef tenderloin, pickled gherkins, cherry tomatoes and fresh mixed salad leaves. Served with vinaigrette.', price: 3790 },
+      { name: 'Салат с запеченным лососем', name_kz: 'Пісірілген лосось салаты', name_en: 'Roasted salmon salad', desc: 'Нежный лосось, запечённый до сочной текстуры, подаётся с миксом свежей зелени, черри, огурцами и тонкими миндальными слайсами.', desc_kz: 'Шырынды болғанша пісірілген нәзік лосось балғын көк шөп қоспасымен, черри, қияр және жұқа бадам тілімдерімен беріледі.', desc_en: 'Tender salmon, baked until juicy, served with fresh mixed greens, cherry tomatoes, cucumbers and thin almond flakes.', price: 3290 },
+      { name: 'Салат с курицей и сыром салакис', name_kz: 'Тауық пен салакис ірімшігі салаты', name_en: 'Chicken salad with Salakis cheese', desc: 'Нежное куриное филе в сопровождении свежих садовых листьев, овощей и воздушного сыра Салакис.', desc_kz: 'Жұмсақ тауық филесі, балғын жапырақ салат, көкөністер және ауадай жеңіл Салакис ірімшігі.', desc_en: 'Tender chicken fillet with fresh garden greens, vegetables and airy Salakis cheese.', price: 2790 },
+      { name: 'Салат с тыквой и страчателлой', name_kz: 'Асқабақ пен страчателла салаты', name_en: 'Pumpkin and stracciatella salad', price: 2590 },
+      { name: 'Ачечили с курицей', name_kz: 'Тауықты ачечили', name_en: 'Achechili with chicken', desc: 'Сочное куриное филе с болгарским перцем, микс салатов, черри и кедровые орехи. Заправляется фирменной медово-горчичной заправкой.', desc_kz: 'Шырынды тауық филесі, болгар бұрышы, салат жапырақтары, черри және самырсын жаңғағы. Фирмалық бал-қыша тұздығымен.', desc_en: 'Juicy chicken fillet with bell pepper, mixed salad leaves, cherry tomatoes and pine nuts, dressed with our signature honey-mustard dressing.', price: 3090 },
+      { name: 'Салат «Томаты в сливочной ноте»', name_kz: '«Кілегейлі томаттар» салаты', name_en: 'Tomatoes in a Cream Note salad', price: 2990 },
     ]
   },
   {
     id: 'cold_starters',
     name: 'Холодные закуски', name_kz: 'Суық тағамдар', name_en: 'Cold Starters',
     items: [
-      { name: 'Авокадо с креветками в авторском соусе', name_kz: 'Авокадо мен креветка авторлық соуспен', name_en: 'Avocado with shrimp in signature sauce', desc: 'Сочные обжаренные креветки, спелое авокадо, помидоры и красный лук, заправленные оливковым маслом и белым бальзамическим соусом. Подаётся с долькой лайма.', price: 4290 },
-      { name: 'Ассорти оливок с греческим сыром', name_kz: 'Грек ірімшігімен зәйтүн ассортисі', name_en: 'Olive assortment with Greek cheese', desc: 'Отборные оливки и маслины в сочетании с нежным греческим сыром.', price: 3990 },
-      { name: 'Карпаччо из говядины с сыром пармезан', name_kz: 'Сиыр ет карпаччо пармезан ірімшігімен', name_en: 'Beef carpaccio with parmesan', desc: 'Тонко нарезанная говядина прожарки Rare, заправленная оливковым маслом первого отжима, с каперсами и вялеными черри, стеблем сельдерея и щедрой стружкой выдержанного пармезана.', price: 4790 },
-      { name: 'Буррата с томатами', name_kz: 'Буррата томатпен', name_en: 'Burrata with tomatoes', desc: 'Нежная сливочная буррата в сочетании со спелыми помидорами, украшенная бальзамическим кремом.', price: 4390 },
-      { name: 'Ассорти Мезе', name_kz: 'Мезе ассортисі', name_en: 'Meze assortment', desc: 'Нежный классический хумус, свекольный вариант с ярким вкусом и освежающий хумус с мятой и огурцами. Подаётся с тёплой питой.', price: 2390 },
+      { name: 'Буррата с запечёнными томатами', name_kz: 'Пісірілген томатты буррата', name_en: 'Burrata with roasted tomatoes', desc: 'Нежная сливочная буррата в сочетании со спелыми томатами, украшенная бальзамическим кремом.', desc_kz: 'Піскен томаттармен үйлескен нәзік кілегейлі буррата, бальзам кремімен безендірілген.', desc_en: 'Creamy burrata with ripe tomatoes, finished with balsamic cream.', price: 4390 },
+      { name: 'Ассорти оливок с греческим сыром', name_kz: 'Грек ірімшігімен зәйтүн ассортиі', name_en: 'Olive platter with Greek cheese', desc: 'Отборные оливки и маслины в сочетании с нежным греческим сыром.', desc_kz: 'Іріктелген жасыл және қара зәйтүн нәзік грек ірімшігімен.', desc_en: 'A selection of green and black olives with soft Greek cheese.', price: 3990 },
+      { name: 'Ассорти мезе', name_kz: 'Мезе ассортиі', name_en: 'Meze platter', desc: 'Нежный классический хумус, свекольный вариант с ярким вкусом и освежающий хумус с мятой и огурцами. Подаётся с тёплой питой.', desc_kz: 'Нәзік классикалық хумус, ашық дәмді қызылшалы хумус және жалбыз бен қияр қосылған сергітетін хумус. Жылы питамен беріледі.', desc_en: 'Smooth classic hummus, vibrant beetroot hummus and refreshing hummus with mint and cucumber. Served with warm pita.', price: 2390 },
+      { name: 'Карпаччо из говядины с сыром пармезан', name_kz: 'Сиыр ет карпаччо пармезан ірімшігімен', name_en: 'Beef carpaccio with parmesan', desc: 'Нежная говяжья вырезка степени прожарки Rare, заправленная оливковым маслом первого отжима, с каперсами и вялеными черри, стеблем сельдерея и щедрой стружкой выдержанного пармезана.', desc_kz: 'Rare дәрежесінде пісірілген нәзік сиыр еті, алғашқы сығымдағы зәйтүн майымен, каперс, кептірілген черри, балдыркөк сабағы және жетілген пармезанның мол жоңқасымен.', desc_en: 'Tender beef tenderloin, cooked rare, dressed with extra virgin olive oil, with capers, sun-dried cherry tomatoes, celery and generous shavings of aged parmesan.', price: 4790 },
+      { name: 'Авокадо с креветками в авторском соусе', name_kz: 'Авокадо мен креветка авторлық соуспен', name_en: 'Avocado with shrimp in signature sauce', desc: 'Сочные обжаренные креветки, спелое авокадо, помидоры и красный лук, заправленные оливковым маслом и белым бальзамическим соусом. Подаётся с долькой лайма.', desc_kz: 'Шырынды қуырылған креветка, піскен авокадо, қызанақ және қызыл пияз, зәйтүн майы мен ақ бальзам тұздығымен. Лайм тілімімен беріледі.', desc_en: 'Juicy seared shrimp, ripe avocado, tomatoes and red onion, dressed with olive oil and white balsamic. Served with a lime wedge.', price: 4290 },
+    ]
+  },
+  {
+    id: 'hot_starters',
+    name: 'Горячие закуски', name_kz: 'Ыстық тағамдар', name_en: 'Hot Starters',
+    items: [
+      { name: 'Ассорти гирос', name_kz: 'Гирос ассортиі', name_en: 'Gyros platter', price: 4990 },
+      { name: 'Рулет из лосося', name_kz: 'Лосось рулеті', name_en: 'Salmon roll', desc: 'Нежное филе свежей сёмги, завёрнутое в хрустящее тесто с мягким сливочным сыром. Подаётся с ароматным сливочным соусом и долькой лимона.', desc_kz: 'Жұмсақ кілегейлі ірімшікпен бірге қытырлақ қамырға оралған жас албырт филесі. Хош иісті кілегей тұздығымен және лимон тілімімен беріледі.', desc_en: 'Fresh salmon fillet wrapped in crisp pastry with soft cream cheese. Served with a fragrant cream sauce and a lemon wedge.', price: 4990 },
+      { name: 'Креветки в греческом стиле', name_kz: 'Грек стиліндегі креветка', name_en: 'Shrimp Greek style', desc: 'Обжаренные тигровые креветки с томатами, болгарским перцем «светофор», подаются с обжаренным хлебом чиабатта и греческим сыром.', desc_kz: 'Қызанақ және үш түсті болгар бұрышымен қуырылған жолбарыс креветкалары, қуырылған чиабатта нанымен және грек ірімшігімен беріледі.', desc_en: 'Seared tiger prawns with tomatoes and tri-colour bell peppers, served with toasted ciabatta and Greek cheese.', price: 5490 },
+      { name: 'Мидии в соусе том-ям', name_kz: 'Мидия том-ям соусында', name_en: 'Mussels in tom yum sauce', desc: 'Сочные мидии, тушённые в насыщенном соусе том-ям на основе традиционной пасты и ароматного бульона. Подаются с хрустящей чиабаттой.', desc_kz: 'Дәстүрлі паста мен хош иісті сорпа негізіндегі қою том-ям тұздығында бұқтырылған шырынды мидиялар. Қытырлақ чиабаттамен беріледі.', desc_en: 'Juicy mussels simmered in a rich tom yum sauce made with traditional paste and aromatic broth. Served with crisp ciabatta.', price: 3390 },
+      { name: 'Фахитос с говядиной', name_kz: 'Сиыр еті фахитосы', name_en: 'Beef fajitas', price: 5290 },
     ]
   },
   {
     id: 'soups',
     name: 'Супы', name_kz: 'Сорпалар', name_en: 'Soups',
     items: [
-      { name: 'Суп Мерджимек', name_kz: 'Мерджимек сорпасы', name_en: 'Mercimek soup', desc: 'Ароматный традиционный турецкий суп из бобов чечевицы, подаётся с хрустящими сухарями.', price: 1790 },
-      { name: 'Суп лапша с куриными фрикадельками', name_kz: 'Тауық кесптесімен лапша сорпасы', name_en: 'Noodle soup with chicken meatballs', price: 1690 },
-      { name: 'Суп овощной Эдна', name_kz: 'Эдна көкөніс сорпасы', name_en: 'Edna vegetable soup', desc: 'Ароматный суп на овощном бульоне с картофелем, морковью, болгарским перцем «светофор», репчатым луком и нутом.', price: 1790 },
-      { name: 'Рамен из говядины', name_kz: 'Сиыр ет рамені', name_en: 'Beef ramen', price: 3090 },
-      { name: 'Харчо', name_kz: 'Харчо', name_en: 'Kharcho', desc: 'Ароматный средне-острый суп по традиционному грузинскому рецепту, приготовленный на бульоне из говядины с добавлением риса и специй.', price: 1990 },
-      { name: 'Том-ям с морепродуктами', name_kz: 'Теңіз өнімдері Том-ям', name_en: 'Seafood Tom Yum', desc: 'Классический тайский суп с креветками, мидиями, кальмарами и осьминогами на основе традиционной пасты том-ям, с ароматом лайма, лемонграсса и специй. Подаётся с рисом.', price: 4290 },
+      { name: 'Том ям с морепродуктами', name_kz: 'Теңіз өнімдері қосылған том ям', name_en: 'Seafood tom yum', desc: 'Классический тайский суп с креветками, мидиями, кальмарами и осьминогами на основе традиционной пасты том-ям, с ароматом лайма, лемонграсса и специй. Подаётся с рисом.', desc_kz: 'Дәстүрлі том-ям пастасы негізіндегі креветка, мидия, кальмар және сегізаяқ қосылған классикалық тай сорпасы, лайм, лемонграсс және дәмдеуіштер хош иісімен. Күрішпен беріледі.', desc_en: 'Classic Thai soup with shrimp, mussels, squid and octopus on a traditional tom yum paste, fragrant with lime, lemongrass and spices. Served with rice.', price: 4290 },
+      { name: 'Рамен из говядины', name_kz: 'Сиыр етінен рамен', name_en: 'Beef ramen', price: 3090 },
+      { name: 'Суп лапша с куриными фрикадельками', name_kz: 'Тауық фрикаделькалы кеспе көже', name_en: 'Noodle soup with chicken meatballs', price: 1690 },
+      { name: 'Харчо', name_kz: 'Харчо', name_en: 'Kharcho', desc: 'Ароматный средне-острый суп по традиционному грузинскому рецепту, приготовленный на бульоне из говядины с добавлением риса и специй.', desc_kz: 'Сиыр етінің сорпасында күріш пен дәмдеуіштер қосып, дәстүрлі грузин рецептімен әзірленген орташа ащы хош иісті сорпа.', desc_en: 'Fragrant, medium-spicy Georgian soup made the traditional way on beef broth with rice and spices.', price: 1990 },
+      { name: 'Суп Мерджимек', name_kz: 'Мерджимек сорпасы', name_en: 'Mercimek soup', desc: 'Ароматный традиционный турецкий суп из бобов чечевицы, подаётся с хрустящими сухарями.', desc_kz: 'Жасымықтан жасалған хош иісті дәстүрлі түрік сорпасы, қытырлақ кептірілген нанмен беріледі.', desc_en: 'Fragrant traditional Turkish lentil soup, served with crunchy croutons.', price: 1790 },
+      { name: 'Овощной Эдна', name_kz: 'Эдна көкөніс сорпасы', name_en: 'Edna vegetable soup', desc: 'Ароматный суп на овощном бульоне с картофелем, морковью, болгарским перцем «светофор», репчатым луком и нутом.', desc_kz: 'Картоп, сәбіз, үш түсті болгар бұрышы, пияз және ноқат қосылған көкөніс сорпасындағы хош иісті сорпа.', desc_en: 'Fragrant vegetable broth with potatoes, carrots, tri-colour bell peppers, onion and chickpeas.', price: 1790 },
+      { name: 'Соте из морепродуктов', name_kz: 'Теңіз өнімдері сотесі', name_en: 'Seafood sauté', desc: 'Мидии, креветки, кольца кальмара, каракатицы, помидоры черри, томатный острый соус и чесночный багет.', desc_kz: 'Мидия, креветка, кальмар сақиналары, каракатица, черри қызанақ, ащы томат тұздығы және сарымсақты багет.', desc_en: 'Mussels, shrimp, squid rings, cuttlefish, cherry tomatoes, spicy tomato sauce and garlic baguette.', price: 4190 },
+      { name: 'Тыквенный суп', name_kz: 'Асқабақ сорпасы', name_en: 'Pumpkin soup', price: 1790 },
     ]
   },
   {
     id: 'pasta',
     name: 'Паста', name_kz: 'Паста', name_en: 'Pasta',
     items: [
-      { name: 'Пенне Арабьята в томатном соусе', name_kz: 'Томат соусындағы Пенне Арабьята', name_en: 'Penne Arrabbiata in tomato sauce', desc: 'Паста пенне в насыщенном соусе из спелых томатов с добавлением оливкового масла и специй. Подаётся с щедрой стружкой выдержанного пармезана.', price: 3090 },
-      { name: 'Лингвини с морепродуктами', name_kz: 'Теңіз өнімдері лингвинасы', name_en: 'Linguine with seafood', desc: 'Тонкая паста лингвини в деликатном сливочном соусе с мидиями, креветками и осьминогами. Завершено ароматным пармезаном, создающим гармоничный вкус моря и сливочной нежности.', price: 3990 },
-      { name: 'Паста Неро с морепродуктами', name_kz: 'Теңіз өнімдері Паста Неро', name_en: 'Pasta Nero with seafood', desc: 'Черное спагетти в насыщенном томатном соусе с креветками, мини осьминогами и мидиями.', price: 3990 },
-      { name: 'Альфредо', name_kz: 'Альфредо', name_en: 'Alfredo', desc: 'Нежные фетучини в сливочном соусе с шампиньонами и сочным куриным филе, дополненные ароматным пармезаном.', price: 3190 },
-      { name: 'Спагетти болоньезе', name_kz: 'Спагетти болоньезе', name_en: 'Spaghetti bolognese', desc: 'Традиционная итальянская паста с насыщенным мясным соусом болоньезе, приготовленным по классическому рецепту, и щедрой порцией тертого пармезана.', price: 3390 },
+      { name: 'Паста Альфредо', name_kz: 'Альфредо пастасы', name_en: 'Pasta Alfredo', desc: 'Нежные феттучини в сливочном соусе с шампиньонами и сочным куриным филе, дополненные ароматным пармезаном.', desc_kz: 'Шампиньон және шырынды тауық филесі қосылған кілегей тұздығындағы нәзік феттучини, хош иісті пармезанмен.', desc_en: 'Fettuccine in a cream sauce with mushrooms and juicy chicken fillet, finished with fragrant parmesan.', price: 3190 },
+      { name: 'Спагетти болоньезе', name_kz: 'Болоньезе спагеттиі', name_en: 'Spaghetti bolognese', price: 3390 },
+      { name: 'Паста пенне с куриной грудкой, вялеными томатами и соусом песто', name_kz: 'Тауық төс еті, кептірілген томат және песто соусы қосылған пенне', name_en: 'Penne with chicken breast, sun-dried tomatoes and pesto', price: 3290 },
+      { name: 'Лингвини с морепродуктами', name_kz: 'Теңіз өнімдері лингвинасы', name_en: 'Linguine with seafood', desc: 'Тонкая паста лингвини в деликатном сливочном соусе с мидиями, креветками и осьминогами. Завершено ароматным пармезаном, создающим гармоничный вкус моря и сливочной нежности.', desc_kz: 'Мидия, креветка және сегізаяқ қосылған нәзік кілегей тұздығындағы жұқа лингвини. Хош иісті пармезан теңіз дәмі мен кілегей нәзіктігін үйлестіреді.', desc_en: 'Thin linguine in a delicate cream sauce with mussels, shrimp and octopus, finished with fragrant parmesan — the taste of the sea with a creamy richness.', price: 3990 },
+      { name: 'Лингвини с сыром, кабачками, базиликом и хрустящей крошкой из пармезана', name_kz: 'Ірімшік, кәді, насыбайгүл және қытырлақ пармезан үгіндісі қосылған лингвини', name_en: 'Linguine with cheese, zucchini, basil and crispy parmesan crumble', price: 2490 },
+      { name: 'Паста с креветками и сыром страчателла', name_kz: 'Креветка мен страчателла ірімшігі қосылған паста', name_en: 'Pasta with shrimp and stracciatella', price: 3990 },
+      { name: 'Паста Неро с морепродуктами', name_kz: 'Теңіз өнімдері Паста Неро', name_en: 'Pasta Nero with seafood', desc: 'Чёрные спагетти в насыщенном томатном соусе с креветками, мини-осьминогами и мидиями.', desc_kz: 'Креветка, кішкентай сегізаяқтар және мидиялар қосылған қою томат тұздығындағы қара спагетти.', desc_en: 'Black spaghetti in a rich tomato sauce with shrimp, baby octopus and mussels.', price: 3990 },
     ]
   },
   {
     id: 'pizza',
     name: 'Пицца на дровяной печи', name_kz: 'Отын пешіндегі пицца', name_en: 'Wood-fired Pizza',
     items: [
-      { name: 'Пепперони', name_kz: 'Пепперони', name_en: 'Pepperoni', price: 3890 },
-      { name: 'Маргарита', name_kz: 'Маргарита', name_en: 'Margherita', price: 2990 },
-      { name: 'Мексиканская', name_kz: 'Мексикандық', name_en: 'Mexican', price: 3290 },
-      { name: 'Греческая пицца', name_kz: 'Грек пиццасы', name_en: 'Greek pizza', desc: 'Тонкое тесто с нежным белым соусом, куриным филе, томатами черри, рукколой и греческим сыром Салакис.', price: 3990 },
-      { name: 'Пицца с бурратой', name_kz: 'Буррата пиццасы', name_en: 'Pizza with burrata', desc: 'Традиционная итальянская пицца на тонком тесте. Томатный соус и спелые помидоры, нежная буррата и отборная руккола.', price: 5690 },
-      { name: 'Пицца болоньезе', name_kz: 'Болоньезе пицца', name_en: 'Pizza bolognese', price: 3290 },
-      { name: 'Пицца с морепродуктами', name_kz: 'Теңіз өнімдері пиццасы', name_en: 'Seafood pizza', desc: 'Тонкое тесто, нежный красный соус, сочные креветки и филе семги, сырная корочка и легкий аромат моря.', price: 5790 },
+      { name: 'Пицца Пепперони', name_kz: 'Пепперони пиццасы', name_en: 'Pepperoni pizza', price: 3890 },
+      { name: 'Пицца Мексиканская', name_kz: 'Мексика пиццасы', name_en: 'Mexican pizza', price: 3290 },
+      { name: 'Пицца Маргарита', name_kz: 'Маргарита пиццасы', name_en: 'Margherita pizza', price: 2990 },
+      { name: 'Пицца Болоньезе', name_kz: 'Болоньезе пицца', name_en: 'Pizza bolognese', price: 3290 },
+      { name: 'Пицца Греческая', name_kz: 'Грек пиццасы', name_en: 'Greek pizza', desc: 'Тонкое тесто с нежным белым соусом, куриным филе, томатами черри, рукколой и греческим сыром Салакис.', desc_kz: 'Нәзік ақ тұздық, тауық филесі, черри қызанақ, руккола және грек ірімшігі Салакис қосылған жұқа қамыр.', desc_en: 'Thin crust with a delicate white sauce, chicken fillet, cherry tomatoes, arugula and Greek Salakis cheese.', price: 3990 },
+      { name: 'Пицца с бурратой', name_kz: 'Буррата пиццасы', name_en: 'Pizza with burrata', desc: 'Традиционная итальянская пицца на тонком тесте. Томатный соус и спелые помидоры, нежная буррата и отборная руккола.', desc_kz: 'Жұқа қамырдағы дәстүрлі итальяндық пицца. Томат тұздығы мен піскен қызанақ, нәзік буррата және іріктелген руккола.', desc_en: 'Traditional Italian thin-crust pizza with tomato sauce, ripe tomatoes, creamy burrata and fresh arugula.', price: 5690 },
+      { name: 'Горячая сладкая пицца с мороженым', name_kz: 'Балмұздақ қосылған ыстық тәтті пицца', name_en: 'Warm sweet pizza with ice cream', desc: 'Горячая десертная пицца с бананом, клубникой и карамельным соусом. Подаётся с мороженым.', desc_kz: 'Банан, құлпынай және карамель тұздығы қосылған ыстық десерттік пицца. Балмұздақпен беріледі.', desc_en: 'Warm dessert pizza with banana, strawberries and caramel sauce. Served with ice cream.', price: 3490 },
+      { name: 'Пицца с морепродуктами', name_kz: 'Теңіз өнімдері пиццасы', name_en: 'Seafood pizza', desc: 'Тонкое тесто, нежный красный соус, сочные креветки и филе сёмги, сырная корочка и лёгкий аромат моря.', desc_kz: 'Жұқа қамыр, нәзік қызыл тұздық, шырынды креветка мен албырт филесі, ірімшік қабығы және теңіздің жеңіл хош иісі.', desc_en: 'Thin crust, a light red sauce, juicy shrimp and salmon fillet, a golden cheese crust and a hint of the sea.', price: 5790 },
+      { name: 'Пицца с яблоком и мёдом', name_kz: 'Алма мен бал қосылған пицца', name_en: 'Apple and honey pizza', price: 3190 },
     ]
   },
   {
-    id: 'khachapuri',
-    name: 'Хачапури и Пиде', name_kz: 'Хачапури және Пиде', name_en: 'Khachapuri & Pide',
+    id: 'bakery',
+    name: 'Хачапури и выпечка', name_kz: 'Хачапури мен пісірмелер', name_en: 'Khachapuri & Bakes',
     items: [
-      { name: 'Хачапури по-Аджарски', name_kz: 'Аджарлық хачапури', name_en: 'Adjarian khachapuri', price: 3690 },
-      { name: 'Хачапури по-Мегрельски', name_kz: 'Мегрелдік хачапури', name_en: 'Megrelian khachapuri', price: 3690 },
+      { name: 'Хачапури по-мегрельски', name_kz: 'Мегрелдік хачапури', name_en: 'Megrelian khachapuri', price: 3690 },
+      { name: 'Хачапури по-аджарски', name_kz: 'Аджарлық хачапури', name_en: 'Adjarian khachapuri', price: 3690 },
       { name: 'Пиде с говядиной', name_kz: 'Сиыр етті пиде', name_en: 'Pide with beef', price: 3990 },
+      { name: 'Сырная лепёшка с ароматом трюфеля', name_kz: 'Трюфель хош иісті ірімшік нан', name_en: 'Cheese flatbread with truffle aroma', price: 2590 },
+      { name: 'Кубдари с овощным салатом', name_kz: 'Көкөніс салатымен кубдари', name_en: 'Kubdari with vegetable salad', price: 4690 },
+      { name: 'Кальцоне Birria', name_kz: 'Birria кальцонесі', name_en: 'Birria calzone', price: 4690 },
     ]
   },
   {
     id: 'hot_dishes',
     name: 'Горячие блюда', name_kz: 'Ыстық тамақтар', name_en: 'Hot Dishes',
     items: [
-      { name: 'Медальоны из говядины с картофельным пюре', name_kz: 'Сиыр ет медальоны картоп пюремен', name_en: 'Beef medallions with mashed potatoes', desc: 'Сочная говяжья вырезка, приготовленная на гриле, подаётся с бархатистым картофельным пюре и щедро украшена насыщенным грибным соусом.', price: 5490 },
-      { name: 'Куриное филе-гриль с брокколи и кукурузой', name_kz: 'Тауық филе-гриль брокколи мен жүгерімен', name_en: 'Grilled chicken fillet with broccoli and corn', price: 3990 },
-      { name: 'Клефтико', name_kz: 'Клефтико', name_en: 'Kleftiko', desc: 'Сочное мясо, медленно томлёное с картофелем, чесноком и свежей зеленью, создаёт насыщенный и гармоничный вкус Греции.', price: 4290 },
       { name: 'Рибай стейк', name_kz: 'Рибай стейк', name_en: 'Ribeye steak', price: 6990 },
-      { name: 'Томлёные говяжьи рёбра', name_kz: 'Тұншыққан сиыр қабырғасы', name_en: 'Braised beef ribs', price: 6690 },
-      { name: 'Мясо по-гречески с питой', name_kz: 'Грекше ет питамен', name_en: 'Greek-style meat with pita', desc: 'Сочная говядина, обжаренная до золотистой корочки, подаётся с насыщенным соусом из греческого ореха, обжаренными кабачками и свежей хлебной питой.', price: 4890 },
-      { name: 'Сувлаки', name_kz: 'Сувлаки', name_en: 'Souvlaki', desc: 'Сочная курица в ароматном маринаде, обжаренная на шпажке до мягкости, подаётся с картофелем и соусом дзадзыки.', price: 3890 },
-      { name: 'Стифадо', name_kz: 'Стифадо', name_en: 'Stifado', desc: 'Сочное куриное филе, обжаренное до золотистой корочки, подаётся с бархатистым сливочно-грибным соусом.', price: 3590 },
-      { name: 'Соте из морепродуктов', name_kz: 'Теңіз өнімдері сотесі', name_en: 'Seafood sauté', desc: 'Мидии, креветки, кольца кальмара, каракатицы, помидоры черри, томатный острый соус и чесночный багет.', price: 4190 },
-      { name: 'Медальоны по-гречески', name_kz: 'Грекше медальондар', name_en: 'Greek-style medallions', desc: 'Нежные медальоны, приготовленные по греческому рецепту, подаются с бархатистым картофельным пюре и двумя соусами — сливочным и ореховым.', price: 6990 },
-      { name: 'Мусака с баклажаном', name_kz: 'Баклажанды мусака', name_en: 'Moussaka with eggplant', desc: 'Отборный баклажан, запечённый до нежности в дровяной печи, с добавлением говяжьего фарша, украшен тёртым пармезаном и сливочным соусом, который тает, создавая благородную сливочно-дымную ноту.', price: 3290 },
-      { name: 'Оджахури', name_kz: 'Оджахури', name_en: 'Ojakhuri', desc: 'Нежные кусочки мяса, обжаренные с картофелем, луком и болгарским перцем.', price: 3390 },
-      { name: 'Запеченный цыпленок по-грузински', name_kz: 'Грузинша пісірілген тауық', name_en: 'Georgian baked chicken', desc: 'Сочный фермерский цыплёнок, маринованный в грузинских специях и чесноке, запечённый до золотистой корочки.', price: 4290 },
-      { name: 'Запечённый картофель с говядиной (в печи)', name_kz: 'Пеште пісірілген картоп сиыр етімен', name_en: 'Baked potato with beef (in oven)', price: 5590 },
-      { name: 'Чашашули', name_kz: 'Чашашули', name_en: 'Chashushuli', desc: 'Нежная говядина, медленно томлёная часами по традиционному грузинскому рецепту, с ароматными сезонными овощами, свежими травами и тщательно подобранными специями.', price: 4890 },
-      { name: 'Скерт с молодым картофелем и сырным соусом', name_kz: 'Скерт жас картоп пен ірімшік соуспен', name_en: 'Skirt steak with young potatoes and cheese sauce', desc: 'Скерт из говядины, приготовленный до идеальной прожарки, с молодым картофелем и бархатистым сырным соусом.', price: 6990 },
-      { name: 'Фахитос с говядиной', name_kz: 'Сиыр еті фахитосы', name_en: 'Beef fajitas', desc: 'Говядина с овощным ассорти, обжаренная с мексиканскими соусами.', price: 5290 },
-      { name: 'Баранина по-грузински', name_kz: 'Грузинша қой еті', name_en: 'Georgian-style lamb', desc: 'Сочное мясо баранины, медленно томлёное с грузинскими специями, чесноком и свежей зеленью. Подаётся с картофелем и насыщенным ароматом Кавказа.', price: 3690 },
-      { name: 'Сачтава с рисом', name_kz: 'Күрішті сачтава', name_en: 'Sachtava with rice', desc: 'Тушёный говяжий фарш в насыщенном томатном соусе с ароматными специями, подаётся с рассыпчатым рисом.', price: 3790 },
+      { name: 'Медальоны по-гречески', name_kz: 'Грекше медальондар', name_en: 'Greek-style medallions', price: 6990 },
+      { name: 'Стейк из сёмги под сливочным соусом со шпинатом', name_kz: 'Лосось стейкі кілегей соусы мен шпинатпен', name_en: 'Salmon steak with cream sauce and spinach', price: 6990 },
+      { name: 'Куриное филе с брокколи и кукурузой', name_kz: 'Тауық филе-гриль брокколи мен жүгерімен', name_en: 'Grilled chicken fillet with broccoli and corn', price: 3990 },
+      { name: 'Стифадо', name_kz: 'Стифадо', name_en: 'Stifado', desc: 'Сочное куриное филе, обжаренное до золотистой корочки, подаётся с бархатистым сливочно-грибным соусом.', desc_kz: 'Алтын түсті қабыққа дейін қуырылған шырынды тауық филесі, барқыттай кілегейлі-саңырауқұлақ тұздығымен беріледі.', desc_en: 'Juicy chicken fillet, seared golden and served with a velvety creamy mushroom sauce.', price: 3590 },
+      { name: 'Куриный шницель с грибами', name_kz: 'Саңырауқұлақты тауық шницелі', name_en: 'Chicken schnitzel with mushrooms', desc: 'Курица в панировке со сливочно-грибным соусом, с добавлением соуса демиглас.', desc_kz: 'Панировкадағы тауық еті кілегейлі-саңырауқұлақ тұздығымен және демиглас тұздығымен.', desc_en: 'Breaded chicken with a creamy mushroom sauce and demi-glace.', price: 2890 },
+      { name: 'Мясо по-гречески с питой', name_kz: 'Грекше ет питамен', name_en: 'Greek-style meat with pita', desc: 'Сочная говядина, обжаренная до золотистой корочки с луком, подаётся с насыщенным соусом из грецкого ореха, обжаренными кабачками и свежей хлебной питой.', desc_kz: 'Пиязбен бірге алтын түсті қабыққа дейін қуырылған шырынды сиыр еті, қою грек жаңғағы тұздығымен, қуырылған кәдімен және балғын питамен беріледі.', desc_en: 'Juicy beef seared golden with onion, served with a rich walnut sauce, pan-fried zucchini and fresh pita.', price: 4890 },
+      { name: 'Оджахури', name_kz: 'Оджахури', name_en: 'Ojakhuri', desc: 'Нежные кусочки говядины, обжаренные с картофелем, луком, болгарским перцем и грузинскими специями.', desc_kz: 'Картоп, пияз, болгар бұрышы және грузин дәмдеуіштерімен қуырылған нәзік сиыр еті тілімдері.', desc_en: 'Tender pieces of beef pan-fried with potatoes, onion, bell pepper and Georgian spices.', price: 3390 },
+      { name: 'Лазанья', name_kz: 'Лазанья', name_en: 'Lasagna', price: 3490 },
+      { name: 'Дорадо на гриле с брокколи и черри', name_kz: 'Гриль дорадо брокколи мен черримен', name_en: 'Grilled dorado with broccoli and cherry tomatoes', price: 6990 },
+      { name: 'Гирос с цыпленком', name_kz: 'Тауық гиросы', name_en: 'Chicken gyros', desc: 'Нежный цыплёнок, картофель фри, соус дзадзыки, свежие овощи и фирменная пита.', desc_kz: 'Нәзік балапан еті, фри картобы, дзадзыки тұздығы, балғын көкөністер және фирмалық пита.', desc_en: 'Tender chicken, fries, tzatziki, fresh vegetables and our signature pita.', price: 2990 },
+      { name: 'Мусака с баклажаном', name_kz: 'Баклажанды мусака', name_en: 'Moussaka with eggplant', desc: 'Отборный баклажан, запечённый до нежности в дровяной печи, с добавлением говяжьего фарша, украшен тёртым пармезаном и сливочным соусом, который тает, создавая благородную сливочно-дымную ноту.', desc_kz: 'Отын пешінде жұмсарғанша пісірілген іріктелген баклажан сиыр етінің тартпасымен, үгітілген пармезанмен және еріп, нәзік кілегейлі-ысталған дәм беретін кілегей тұздығымен.', desc_en: 'Eggplant baked in the wood-fired oven until tender, with minced beef, grated parmesan and a cream sauce that melts into a rich, smoky creaminess.', price: 3290 },
+      { name: 'Бифтеки с копченой сметаной', name_kz: 'Ысталған қаймақты бифтеки', name_en: 'Bifteki with smoked sour cream', desc: 'Нежная говяжья котлета с сыром и свежей кинзой, дополненная запечённым томатом, копчёной сметаной и тёплой питой. Сытное блюдо с ярким и насыщенным вкусом.', desc_kz: 'Ірімшік пен балғын кинза қосылған нәзік сиыр котлеті, пісірілген қызанақ, ысталған қаймақ және жылы питамен. Ашық әрі қанық дәмі бар тойымды тағам.', desc_en: 'A tender beef patty with cheese and fresh coriander, served with roasted tomato, smoked sour cream and warm pita. Hearty and full of flavour.', price: 3790 },
+      { name: 'Медальоны из говядины с картофельным пюре', name_kz: 'Сиыр ет медальоны картоп пюремен', name_en: 'Beef medallions with mashed potatoes', desc: 'Сочная говяжья вырезка, приготовленная на гриле, подаётся с бархатистым картофельным пюре и щедро украшена насыщенным грибным соусом.', desc_kz: 'Грильде пісірілген шырынды сиыр еті, барқыттай картоп пюресімен және мол саңырауқұлақ тұздығымен беріледі.', desc_en: 'Juicy grilled beef tenderloin with velvety mashed potatoes and a generous mushroom sauce.', price: 5490 },
+      { name: 'Баклажаны пармиджано', name_kz: 'Баклажан пармеджано', name_en: 'Eggplant parmigiana', desc: 'Нежные ломтики баклажана, запечённые под ароматным томатным соусом и золотистой корочкой из сыра пармезан. Гармоничное сочетание овощей, насыщенного томатного вкуса и благородных сырных нот.', desc_kz: 'Хош иісті томат тұздығы мен пармезан ірімшігінің алтын қабығы астында пісірілген нәзік баклажан тілімдері. Көкөніс, қою томат дәмі мен ірімшіктің үйлесімі.', desc_en: 'Tender eggplant slices baked under a fragrant tomato sauce and a golden parmesan crust — vegetables, rich tomato and cheese in balance.', price: 2590 },
+      { name: 'Сувлаки из курицы', name_kz: 'Тауық сувлакиі', name_en: 'Chicken souvlaki', desc: 'Сочная курица в ароматном маринаде, обжаренная на шпажке до мягкости, подаётся с картофелем и соусом дзадзыки.', desc_kz: 'Хош иісті маринадтағы шырынды тауық еті шиште жұмсарғанша қуырылып, картоппен және дзадзыки тұздығымен беріледі.', desc_en: 'Juicy chicken in a fragrant marinade, grilled on a skewer until tender, served with potatoes and tzatziki.', price: 3890 },
+      { name: 'Сувлаки из сёмги', name_kz: 'Албырт сувлакиі', name_en: 'Salmon souvlaki', price: 5490 },
+      { name: 'Тыквенная лазанья', name_kz: 'Асқабақ лазаньясы', name_en: 'Pumpkin lasagna', price: 2990 },
+      { name: 'Гирос с томленой говядиной', name_kz: 'Бұқтырылған сиыр етінен гирос', name_en: 'Braised beef gyros', desc: 'Томлёная говядина, картофель фри, соус дзадзыки, свежие овощи и фирменная пита.', desc_kz: 'Бұқтырылған сиыр еті, фри картобы, дзадзыки тұздығы, балғын көкөністер және фирмалық пита.', desc_en: 'Slow-braised beef, fries, tzatziki, fresh vegetables and our signature pita.', price: 4290 },
+      { name: 'Томатная пене с оссобуко', name_kz: 'Оссобуко қосылған томатты пенне', name_en: 'Tomato penne with ossobuco', price: 5690 },
+      { name: 'Ризотто с креветками', name_kz: 'Креветкалы ризотто', name_en: 'Shrimp risotto', price: 3690 },
+      { name: 'Запечённый сибас с вонголе в соусе том ям', name_kz: 'Вонголе мен том ям соусындағы пісірілген сибас', name_en: 'Baked sea bass with vongole in tom yum sauce', price: 5990 },
+      { name: 'Чашашули', name_kz: 'Чашушули', name_en: 'Chashushuli', price: 4890 },
     ]
   },
   {
-    id: 'fish',
-    name: 'Блюда из рыбы', name_kz: 'Балық тағамдары', name_en: 'Fish & Seafood',
+    id: 'sides',
+    name: 'Гарниры', name_kz: 'Гарнирлер', name_en: 'Side Dishes',
     items: [
-      { name: 'Дорадо на гриле с брокколи и черри', name_kz: 'Гриль дорадо брокколи мен черримен', name_en: 'Grilled dorado with broccoli and cherry', price: 6990 },
-      { name: 'Запеченный сибас с вонголе в соусе том ям', name_kz: 'Вонголе мен том ям соусындағы пісірілген сибас', name_en: 'Baked sea bass with vongole in tom yum sauce', price: 5990 },
-      { name: 'Стейк из сёмги под сливочным соусом и шпинатом', name_kz: 'Лосось стейкі кілегей соусы мен шпинатпен', name_en: 'Salmon steak with cream sauce and spinach', price: 6990 },
+      { name: 'Картофель фри', name_kz: 'Картоп фри', name_en: 'French fries', price: 990 },
+      { name: 'Рис', name_kz: 'Күріш', name_en: 'Rice', price: 690 },
+      { name: 'Картофельные дольки', name_kz: 'Картоп тіліктері', name_en: 'Potato wedges', price: 990 },
+      { name: 'Брокколи с пармезаном', name_kz: 'Пармезанды брокколи', name_en: 'Broccoli with parmesan', price: 1490 },
+      { name: 'Овощи на гриле', name_kz: 'Гриль көкөністер', name_en: 'Grilled vegetables', price: 1490 },
+      { name: 'Картофельное пюре', name_kz: 'Картоп пюресі', name_en: 'Mashed potatoes', price: 690 },
+      { name: 'Кабачки на гриле', name_kz: 'Гриль кабачок', name_en: 'Grilled zucchini', price: 690 },
+      { name: 'Брокколи черри', name_kz: 'Брокколи мен черри', name_en: 'Broccoli with cherry tomatoes', price: 1290 },
     ]
   },
   {
     id: 'bread',
     name: 'Хлеб', name_kz: 'Нан', name_en: 'Bread',
     items: [
-      { name: 'Ассорти свежей выпечки', name_kz: 'Жаңа пісірілген нан ассортисі', name_en: 'Fresh baked goods assortment', price: 890 },
-      { name: 'Чесночный хлеб с сыром', name_kz: 'Сарымсақты нан ірімшікпен', name_en: 'Garlic bread with cheese', price: 990 },
-      { name: 'Багет белый', name_kz: 'Ақ багет', name_en: 'White baguette', price: 690 },
-      { name: 'Турецкий хлеб Симит', name_kz: 'Симит түрік наны', name_en: 'Turkish Simit bread', price: 490 },
-      { name: 'Чиабатта', name_kz: 'Чиабатта', name_en: 'Ciabatta', price: 1190 },
-      { name: 'Тартин', name_kz: 'Тартин', name_en: 'Tartine', price: 990 },
-      { name: 'Тостерный хлеб', name_kz: 'Тостерлік нан', name_en: 'Toast bread', price: 1490 },
       { name: 'Пита', name_kz: 'Пита', name_en: 'Pita', price: 490 },
-    ]
-  },
-  {
-    id: 'sides',
-    name: 'Гарниры', name_kz: 'Гарнир', name_en: 'Side Dishes',
-    items: [
-      { name: 'Рис', name_kz: 'Күріш', name_en: 'Rice', price: 690 },
-      { name: 'Картофельные дольки', name_kz: 'Картоп тіліктері', name_en: 'Potato wedges', price: 990 },
-      { name: 'Картофель фри', name_kz: 'Картоп фри', name_en: 'French fries', price: 990 },
-      { name: 'Овощи на гриле', name_kz: 'Гриль көкөністер', name_en: 'Grilled vegetables', price: 1490 },
-      { name: 'Пюре', name_kz: 'Пюре', name_en: 'Mashed potatoes', price: 690 },
-      { name: 'Брокколи черри', name_kz: 'Брокколи черри', name_en: 'Broccoli cherry', price: 1290 },
+      { name: 'Чесночный хлеб с сыром', name_kz: 'Ірімшік қосылған сарымсақ наны', name_en: 'Garlic bread with cheese', price: 990 },
+      { name: 'Ассорти свежей выпечки', name_kz: 'Жаңа пісірілген нан ассортиі', name_en: 'Fresh bakery assortment', price: 890 },
+      { name: 'Симит', name_kz: 'Симит түрік наны', name_en: 'Turkish simit bread', price: 490 },
+      { name: 'Тостерный хлеб', name_kz: 'Тостерлік нан', name_en: 'Toast bread', price: 1490 },
+      { name: 'Чиабатта', name_kz: 'Чиабатта', name_en: 'Ciabatta', price: 1190 },
+      { name: 'Багет белый', name_kz: 'Ақ багет', name_en: 'White baguette', price: 690 },
     ]
   },
   {
     id: 'desserts',
     name: 'Десерты', name_kz: 'Десерттер', name_en: 'Desserts',
     items: [
-      { name: 'Чизкейк', name_kz: 'Чизкейк', name_en: 'Cheesecake', price: 2490 },
-      { name: 'Тирамису', name_kz: 'Тирамису', name_en: 'Tiramisu', price: 3490 },
-      { name: 'Фундучный бисквит под хрустальным куполом', name_kz: 'Хрусталь күмбез астындағы жаңғақ бисквит', name_en: 'Hazelnut biscuit under crystal dome', price: 2990 },
-      { name: 'Чизкейк сникерс', name_kz: 'Сникерс чизкейк', name_en: 'Snickers cheesecake', price: 2290 },
-      { name: 'Медовик', name_kz: 'Медовик', name_en: 'Honey cake', price: 1790 },
       { name: 'Чизкейк с малиной', name_kz: 'Таңқурайлы чизкейк', name_en: 'Raspberry cheesecake', price: 2590 },
-      { name: 'Тарт лимонный', name_kz: 'Лимон тарты', name_en: 'Lemon tart', price: 1990 },
-      { name: 'Чёрный принц', name_kz: 'Қара принц', name_en: 'Black Prince', price: 2590 },
-      { name: 'Чизкейк манго маракуйя', name_kz: 'Манго маракуйя чизкейк', name_en: 'Mango passion fruit cheesecake', price: 2290 },
-      { name: 'Греческий йогурт Coffeeteria', name_kz: 'Coffeeteria грек йогурты', name_en: 'Coffeeteria Greek yogurt', desc: 'На выбор: черника, клубничный, со злаками.', price: 1290 },
       { name: 'Брауни с пеканом', name_kz: 'Пекан брауни', name_en: 'Pecan brownie', price: 2190 },
+      { name: 'Чёрный принц', name_kz: 'Қара принц', name_en: 'Black Prince', price: 2590 },
+      { name: 'Медовик', name_kz: 'Медовик', name_en: 'Honey cake', price: 1790 },
+      { name: 'Синнабоны', name_kz: 'Синнабон', name_en: 'Cinnabon', price: 990 },
+      { name: 'Чизкейк', name_kz: 'Чизкейк', name_en: 'Cheesecake', price: 2490 },
+      { name: 'Улитка с маком', name_kz: 'Көкнәр тоқашы', name_en: 'Poppy seed roll', price: 790 },
+      { name: 'Тирамису', name_kz: 'Тирамису', name_en: 'Tiramisu', price: 3490 },
+      { name: 'Ватрушка с крем чизом', name_kz: 'Крем-чиз ватрушкасы', name_en: 'Cream cheese bun', price: 890 },
+      { name: 'Булочка «Сердечко»', name_kz: '«Жүрекше» тоқашы', name_en: 'Heart bun', price: 690 },
+      { name: 'Десерт «Манго»', name_kz: '«Манго» десерті', name_en: 'Mango dessert', price: 2290 },
+      { name: 'Десерт «Кофе»', name_kz: '«Кофе» десерті', name_en: 'Coffee dessert', price: 2890 },
+      { name: 'Мороженое Coffeeteria', name_kz: 'Coffeeteria балмұздағы', name_en: 'Coffeeteria ice cream', price: 1290 },
+      { name: 'Арбуз и дыня', name_kz: 'Қарбыз бен қауын', name_en: 'Watermelon and melon', price: 5000 },
+      { name: 'Десерт «Мишка»', name_kz: '«Аюшық» десерті', name_en: 'Teddy bear dessert', price: 4990 },
+      { name: 'Десерт «Лимон»', name_kz: '«Лимон» десерті', name_en: 'Lemon dessert', price: 2290 },
+      { name: 'Ягоды', name_kz: 'Жидектер', name_en: 'Berries', price: 790 },
+      { name: 'Греческий йогурт Coffeeteria', name_kz: 'Coffeeteria грек йогурты', name_en: 'Coffeeteria Greek yogurt', price: 1290 },
+      { name: 'Десерт «Chanel»', name_kz: '«Chanel» десерті', name_en: 'Chanel dessert', price: 4690 },
+      { name: 'Десерт «Hermes»', name_kz: '«Hermes» десерті', name_en: 'Hermes dessert', price: 4690 },
+      { name: 'Десерт Яблоко', name_kz: '«Алма» десерті', name_en: 'Apple dessert', price: 2190 },
+      { name: 'Фруктовая нарезка', name_kz: 'Жеміс табағы', name_en: 'Fruit platter', price: 17990 },
+    ]
+  },
+  {
+    id: 'kids',
+    name: 'Детское меню', name_kz: 'Балалар мәзірі', name_en: 'Kids Menu',
+    items: [
+      { name: 'Нагетсы с сырным соусом', name_kz: 'Ірімшік тұздығымен наггетс', name_en: 'Nuggets with cheese sauce', price: 1190 },
+      { name: 'Сосиски с пюре', name_kz: 'Пюремен шұжықтар', name_en: 'Sausages with mashed potatoes', price: 1690 },
+      { name: 'Рис отварной с куриными котлетами', name_kz: 'Тауық котлетімен пісірілген күріш', name_en: 'Boiled rice with chicken cutlets', price: 1590 },
+      { name: 'Бантики с курочкой и сыром', name_kz: 'Тауық пен ірімшік қосылған фарфалле', name_en: 'Farfalle with chicken and cheese', price: 2290 },
+      { name: 'Пюре с куриными котлетами', name_kz: 'Тауық котлетімен пюре', name_en: 'Mashed potatoes with chicken cutlets', price: 1590 },
+    ]
+  },
+  {
+    id: 'sauces',
+    name: 'Соусы', name_kz: 'Тұздықтар', name_en: 'Sauces',
+    items: [
+      { name: 'Соус чесночный', name_kz: 'Сарымсақ тұздығы', name_en: 'Garlic sauce', price: 690 },
+      { name: 'Сырный соус', name_kz: 'Ірімшік тұздығы', name_en: 'Cheese sauce', price: 690 },
+      { name: 'Соус сливочный', name_kz: 'Кілегей тұздығы', name_en: 'Cream sauce', price: 690 },
+      { name: 'Кетчуп', name_kz: 'Кетчуп', name_en: 'Ketchup', price: 690 },
+      { name: 'Халапеньо', name_kz: 'Халапеньо', name_en: 'Jalapeño', price: 690 },
+      { name: 'Соус Барбекю', name_kz: 'Барбекю тұздығы', name_en: 'BBQ sauce', price: 690 },
+      { name: 'Табаско', name_kz: 'Табаско', name_en: 'Tabasco', price: 690 },
+      { name: 'Соус Дзадзики', name_kz: 'Дзадзыки тұздығы', name_en: 'Tzatziki', price: 790 },
+    ]
+  },
+  {
+    id: 'coffee',
+    name: 'Кофе', name_kz: 'Кофе', name_en: 'Coffee',
+    items: [
+      { name: 'Капучино 400 мл', name_kz: 'Капучино 400 мл', name_en: 'Cappuccino 400 ml', price: 1290 },
+      { name: 'Капучино 300 мл', name_kz: 'Капучино 300 мл', name_en: 'Cappuccino 300 ml', price: 1090 },
+      { name: 'Американо 300 мл', name_kz: 'Американо 300 мл', name_en: 'Americano 300 ml', price: 990 },
+      { name: 'Латте 400 мл', name_kz: 'Латте 400 мл', name_en: 'Latte 400 ml', price: 1390 },
+      { name: 'Латте 300 мл', name_kz: 'Латте 300 мл', name_en: 'Latte 300 ml', price: 1190 },
+      { name: 'Американо 400 мл', name_kz: 'Американо 400 мл', name_en: 'Americano 400 ml', price: 1190 },
+      { name: 'Капучино на альтернативном молоке 0,3 л', name_kz: 'Балама сүттегі капучино 0,3', name_en: 'Cappuccino with plant milk 0.3', price: 1190 },
+      { name: 'Айс латте', name_kz: 'Айс латте', name_en: 'Iced latte', price: 1390 },
+      { name: 'Флэт уайт', name_kz: 'Флэт уайт', name_en: 'Flat white', price: 1490 },
+      { name: 'Капучино на альтернативном молоке 0,4 л', name_kz: 'Балама сүттегі капучино 0,4', name_en: 'Cappuccino with plant milk 0.4', price: 1390 },
+      { name: 'Эспрессо', name_kz: 'Эспрессо', name_en: 'Espresso', price: 690 },
+      { name: 'Двойной эспрессо', name_kz: 'Қос эспрессо', name_en: 'Double espresso', price: 890 },
+      { name: 'Раф 400 мл', name_kz: 'Раф 400 мл', name_en: 'Raf coffee 400 ml', price: 1790 },
+      { name: 'Айс капучино', name_kz: 'Айс капучино', name_en: 'Iced cappuccino', price: 1290 },
+      { name: 'Гляссе', name_kz: 'Гляссе', name_en: 'Glacé coffee', price: 1890 },
+      { name: 'Бамбл', name_kz: 'Бамбл', name_en: 'Bumble coffee', price: 1490 },
+      { name: 'Раф 300 мл', name_kz: 'Раф 300 мл', name_en: 'Raf coffee 300 ml', price: 1290 },
+      { name: 'Фраппучино', name_kz: 'Фраппучино', name_en: 'Frappuccino', price: 1990 },
+      { name: 'Латте на альтернативном молоке 0,3 л', name_kz: 'Балама сүттегі латте 0,3', name_en: 'Latte with plant milk 0.3', price: 1190 },
+      { name: 'Айс американо', name_kz: 'Айс американо', name_en: 'Iced americano', price: 890 },
+      { name: 'Латте на альтернативном молоке 0,4 л', name_kz: 'Балама сүттегі латте 0,4', name_en: 'Latte with plant milk 0.4', price: 1390 },
+    ]
+  },
+  {
+    id: 'signature',
+    name: 'Авторские и сезонные', name_kz: 'Авторлық және маусымдық', name_en: 'Signature & Seasonal',
+    items: [
+      { name: 'Какао с маршмеллоу', name_kz: 'Маршмеллоу қосылған какао', name_en: 'Hot cocoa with marshmallows', price: 1490 },
+      { name: 'Горячий шоколад', name_kz: 'Ыстық шоколад', name_en: 'Hot chocolate', price: 1290 },
+      { name: 'Айс матча зелёная', name_kz: 'Жасыл айс матча', name_en: 'Iced green matcha', price: 2190 },
+      { name: 'Осенний раф 400 мл', name_kz: 'Күзгі раф 400 мл', name_en: 'Autumn raf 400 ml', price: 1890 },
+      { name: 'Айс матча голубая', name_kz: 'Көк айс матча', name_en: 'Iced blue matcha', price: 2190 },
+      { name: 'Раф фисташка-малина 400 мл', name_kz: 'Пісте-таңқурай рафы 400 мл', name_en: 'Pistachio-raspberry raf 400 ml', price: 1990 },
+      { name: 'Айс латте ванильный', name_kz: 'Ванильді айс латте', name_en: 'Vanilla iced latte', price: 1990 },
+      { name: 'Пунш апельсин-маракуйя', name_kz: 'Апельсин-маракуйя пуншы', name_en: 'Orange-passion fruit punch', price: 1690 },
+      { name: 'Вишнёвый бамбл', name_kz: 'Шиелі бамбл', name_en: 'Cherry bumble', price: 1490 },
+      { name: 'Какао карамель-попкорн', name_kz: 'Карамель-попкорн какаосы', name_en: 'Caramel popcorn cocoa', price: 1990 },
+      { name: 'Фисташковый Раф', name_kz: 'Пісте рафы', name_en: 'Pistachio raf', price: 2290 },
+      { name: 'Фраппе карамель-попкорн', name_kz: 'Карамель-попкорн фраппесі', name_en: 'Caramel popcorn frappé', price: 2290 },
+      { name: 'Фраппе шоко-орех', name_kz: 'Шоколад-жаңғақ фраппесі', name_en: 'Choco-nut frappé', price: 2290 },
+    ]
+  },
+  {
+    id: 'tea',
+    name: 'Чай', name_kz: 'Шай', name_en: 'Tea',
+    items: [
+      { name: 'Ташкентский', name_kz: 'Ташкент шайы', name_en: 'Tashkent tea', price: 1390 },
+      { name: 'Чёрный Ассам', name_kz: 'Қара Ассам', name_en: 'Black Assam', price: 990 },
+      { name: 'Ягодный чай', name_kz: 'Жидек шайы', name_en: 'Berry tea', price: 1490 },
+      { name: 'Эрл Грей', name_kz: 'Эрл Грей', name_en: 'Earl Grey', price: 990 },
+      { name: 'Сенча (зелёный)', name_kz: 'Сенча (жасыл)', name_en: 'Sencha (green)', price: 990 },
+      { name: 'Чай вишня-апельсин', name_kz: 'Шие-апельсин шайы', name_en: 'Cherry-orange tea', price: 1490 },
+      { name: 'Имбирь-апельсин', name_kz: 'Зімбір-апельсин', name_en: 'Ginger-orange', price: 1490 },
+      { name: 'Фруктовый чай', name_kz: 'Жеміс шайы', name_en: 'Fruit tea', price: 1490 },
+      { name: 'Апельсиновый чай', name_kz: 'Апельсин шайы', name_en: 'Orange tea', price: 1490 },
+      { name: 'Малина-лайм', name_kz: 'Таңқурай-лайм', name_en: 'Raspberry-lime', price: 1490 },
+      { name: 'Жасминовый (зелёный)', name_kz: 'Жасмин шайы (жасыл)', name_en: 'Jasmine (green)', price: 1390 },
+      { name: 'Марокканская мята', name_kz: 'Марокко жалбызы', name_en: 'Moroccan mint', price: 1490 },
+      { name: 'Чай облепиха-апельсин', name_kz: 'Шырғанақ-апельсин шайы', name_en: 'Sea buckthorn-orange tea', price: 1490 },
+      { name: 'Екатерина Великая', name_kz: 'Ұлы Екатерина', name_en: 'Catherine the Great', price: 1490 },
+      { name: 'Малиновый с имбирем', name_kz: 'Зімбір қосылған таңқурай шайы', name_en: 'Raspberry-ginger tea', price: 1490 },
+      { name: 'Облепиховый', name_kz: 'Шырғанақ шайы', name_en: 'Sea buckthorn tea', price: 1490 },
+      { name: 'Чай манго-экзотик', name_kz: 'Манго-экзотик шайы', name_en: 'Mango exotic tea', price: 1690 },
+      { name: 'Ягодный сбор', name_kz: 'Жидек жинағы', name_en: 'Berry blend', price: 1490 },
+      { name: 'Вишнёвый чай', name_kz: 'Шие шайы', name_en: 'Cherry tea', price: 1490 },
+      { name: 'Улун', name_kz: 'Улун', name_en: 'Oolong', price: 1390 },
+      { name: 'Адмирал', name_kz: 'Адмирал', name_en: 'Admiral', price: 1490 },
+    ]
+  },
+  {
+    id: 'lemonades',
+    name: 'Лимонады и айс-ти', name_kz: 'Лимонадтар мен айс-ти', name_en: 'Lemonades & Iced Tea',
+    items: [
+      { name: 'Манго-маракуйя 1 л', name_kz: 'Манго-маракуйя 1 л', name_en: 'Mango-passion fruit 1 L', price: 2690 },
+      { name: 'Лайм-киви 1 л', name_kz: 'Лайм-киви 1 л', name_en: 'Lime-kiwi 1 L', price: 2690 },
+      { name: 'Ананас-драгонфрут 1 л', name_kz: 'Ананас-драгонфрут 1 л', name_en: 'Pineapple-dragon fruit 1 L', price: 2690 },
+      { name: 'Ягодный лимонад 1 л', name_kz: 'Жидек лимонады 1 л', name_en: 'Berry lemonade 1 L', price: 2690 },
+      { name: 'Мохито 1 л', name_kz: 'Мохито 1 л', name_en: 'Mojito 1 L', price: 2690 },
+      { name: 'Персик-грейпфрут 1 л', name_kz: 'Шабдалы-грейпфрут 1 л', name_en: 'Peach-grapefruit 1 L', price: 2690 },
+      { name: 'Айс-ти манго-ананас', name_kz: 'Манго-ананас айс-ти', name_en: 'Mango-pineapple iced tea', price: 1590 },
+      { name: 'Лимонад «Греческий сад»', name_kz: '«Грек бағы» лимонады', name_en: 'Greek Garden lemonade', price: 2990 },
+      { name: 'Цитрусовый микс 1 л', name_kz: 'Цитрус миксі 1 л', name_en: 'Citrus mix 1 L', price: 2690 },
+      { name: 'Гранат-малина 1 л', name_kz: 'Анар-таңқурай 1 л', name_en: 'Pomegranate-raspberry 1 L', price: 2690 },
+      { name: 'Тропик 1 л', name_kz: 'Тропик 1 л', name_en: 'Tropic 1 L', price: 2690 },
+      { name: 'Айс-ти ягодный', name_kz: 'Жидекті айс-ти', name_en: 'Berry iced tea', price: 1590 },
+      { name: 'Лимонад личи-ананас', name_kz: 'Личи-ананас лимонады', name_en: 'Lychee-pineapple lemonade', price: 2690 },
+      { name: 'Айс-ти малина-лайм', name_kz: 'Таңқурай-лайм айс-ти', name_en: 'Raspberry-lime iced tea', price: 1590 },
+      { name: 'Морской бриз 1 л', name_kz: 'Теңіз желі 1 л', name_en: 'Sea breeze 1 L', price: 2690 },
+      { name: 'Облепиха-апельсин 1 л', name_kz: 'Шырғанақ-апельсин 1 л', name_en: 'Sea buckthorn-orange 1 L', price: 2690 },
+    ]
+  },
+  {
+    id: 'fresh',
+    name: 'Фреши и смузи', name_kz: 'Фреш және смузи', name_en: 'Fresh Juice & Smoothies',
+    items: [
+      { name: 'Апельсиновый', name_kz: 'Апельсин', name_en: 'Orange', price: 2390 },
+      { name: 'Яблочный', name_kz: 'Алма', name_en: 'Apple', price: 1690 },
+      { name: 'Яблочно-морковный', name_kz: 'Алма-сәбіз', name_en: 'Apple-carrot', price: 1690 },
+      { name: 'Смузи манго-апельсин', name_kz: 'Манго-апельсин смузиі', name_en: 'Mango-orange smoothie', price: 2390 },
+      { name: 'Смузи ананас-груша', name_kz: 'Ананас-алмұрт смузиі', name_en: 'Pineapple-pear smoothie', price: 2390 },
+      { name: 'Смузи банан-клубника', name_kz: 'Банан-құлпынай смузиі', name_en: 'Banana-strawberry smoothie', price: 2390 },
+      { name: 'Киви', name_kz: 'Киви', name_en: 'Kiwi', price: 2590 },
+      { name: 'Ягодный смузи', name_kz: 'Жидек смузиі', name_en: 'Berry smoothie', price: 2390 },
+      { name: 'Морковный', name_kz: 'Сәбіз', name_en: 'Carrot', price: 1390 },
+      { name: 'Сельдерей-яблоко-лимон', name_kz: 'Балдыркөк-алма-лимон', name_en: 'Celery-apple-lemon', price: 1990 },
+      { name: 'Green mix', name_kz: 'Green mix', name_en: 'Green mix', price: 2390 },
+    ]
+  },
+  {
+    id: 'shakes',
+    name: 'Молочные коктейли', name_kz: 'Сүт коктейльдері', name_en: 'Milkshakes',
+    items: [
+      { name: 'Банановый', name_kz: 'Банан', name_en: 'Banana', price: 2190 },
+      { name: 'Клубничный', name_kz: 'Құлпынай', name_en: 'Strawberry', price: 1890 },
+      { name: 'Ванильный', name_kz: 'Ваниль', name_en: 'Vanilla', price: 1890 },
+      { name: 'Орео', name_kz: 'Орео', name_en: 'Oreo', price: 2190 },
+    ]
+  },
+  {
+    id: 'soft',
+    name: 'Прохладительные напитки', name_kz: 'Салқын сусындар', name_en: 'Soft Drinks',
+    items: [
+      { name: 'Coca-Cola / Sprite / Fanta 250 мл', name_kz: 'Coca-Cola / Sprite / Fanta 250 мл', name_en: 'Coca-Cola / Sprite / Fanta 250 ml', price: 890 },
+      { name: 'Вода Turan 0,5 л', name_kz: 'Turan суы 0,5 л', name_en: 'Turan water 0.5 L', price: 990 },
+      { name: 'Боржоми', name_kz: 'Боржоми', name_en: 'Borjomi', price: 1590 },
+      { name: 'Сок Swell', name_kz: 'Swell шырыны', name_en: 'Swell juice', price: 2590 },
+      { name: 'Red Bull', name_kz: 'Red Bull', name_en: 'Red Bull', price: 1690 },
     ]
   },
 ];
 
+// греческие названия разделов — строка над заголовком
+const GREEK = {
+  breakfast: 'ΠΡΩΙΝΟ', salads: 'ΣΑΛΑΤΕΣ', cold_starters: 'ΚΡΥΑ ΟΡΕΚΤΙΚΑ', hot_starters: 'ΖΕΣΤΑ ΟΡΕΚΤΙΚΑ', soups: 'ΣΟΥΠΕΣ',
+  pasta: 'ΖΥΜΑΡΙΚΑ', pizza: 'ΠΙΤΣΑ', bakery: 'ΠΙΤΕΣ', hot_dishes: 'ΚΥΡΙΩΣ ΠΙΑΤΑ', sides: 'ΣΥΝΟΔΕΥΤΙΚΑ', bread: 'ΨΩΜΙ',
+  desserts: 'ΓΛΥΚΑ', kids: 'ΠΑΙΔΙΚΟ ΜΕΝΟΥ', sauces: 'ΣΑΛΤΣΕΣ', coffee: 'ΚΑΦΕΣ', signature: 'ΣΠΕΣΙΑΛΙΤΕ', tea: 'ΤΣΑΙ',
+  lemonades: 'ΛΕΜΟΝΑΔΕΣ', fresh: 'ΧΥΜΟΙ', shakes: 'ΜΙΛΚΣΕΪΚ', soft: 'ΑΝΑΨΥΚΤΙΚΑ',
+};
+
+// фото из PDF-меню (img/), по русскому названию блюда
+// фото — по названию на сайте (названия и цены из iiko, Menu шаг 1)
+const PHOTOS = {
+  'Хрустящий салат с баклажаном': 'eggplant-salad',
+  'Греческий салат': 'greek-salad',
+  'Салат с креветками': 'shrimp-salad',
+  'Салат турецкий со свеклой': 'beet-salad',
+  'Салат с говяжьей вырезкой и соусом винегрет': 'beef-salad',
+  'Салат с запеченным лососем': 'salmon-salad',
+  'Салат с курицей и сыром салакис': 'salakis-salad',
+  'Ачечили с курицей': 'achechili',
+  'Буррата с запечёнными томатами': 'burrata',
+  'Ассорти оливок с греческим сыром': 'olives',
+  'Ассорти мезе': 'meze',
+  'Карпаччо из говядины с сыром пармезан': 'carpaccio',
+  'Авокадо с креветками в авторском соусе': 'avocado-shrimp',
+  'Ассорти гирос': 'gyros-assorti',
+  'Рулет из лосося': 'salmon-roll',
+  'Креветки в греческом стиле': 'greek-shrimp',
+  'Мидии в соусе том-ям': 'mussels',
+  'Том ям с морепродуктами': 'tom-yum',
+  'Рамен из говядины': 'ramen',
+  'Суп лапша с куриными фрикадельками': 'noodle-soup',
+  'Суп Мерджимек': 'mercimek',
+  'Овощной Эдна': 'edna',
+  'Соте из морепродуктов': 'seafood-saute',
+  'Паста Альфредо': 'alfredo',
+  'Паста пенне с куриной грудкой, вялеными томатами и соусом песто': 'penne-pesto',
+  'Лингвини с морепродуктами': 'linguine-seafood',
+  'Лингвини с сыром, кабачками, базиликом и хрустящей крошкой из пармезана': 'linguine-zucchini',
+  'Паста Неро с морепродуктами': 'pasta-nero',
+  'Пицца Пепперони': 'pizza-pepperoni',
+  'Пицца Мексиканская': 'pizza-mexican',
+  'Пицца Маргарита': 'pizza-margherita',
+  'Пицца Болоньезе': 'pizza-bolognese',
+  'Пицца Греческая': 'pizza-greek',
+  'Пицца с бурратой': 'pizza-burrata',
+  'Горячая сладкая пицца с мороженым': 'sweet-pizza',
+  'Пицца с морепродуктами': 'pizza-seafood',
+  'Хачапури по-мегрельски': 'megrelian',
+  'Хачапури по-аджарски': 'adjarian',
+  'Пиде с говядиной': 'pide',
+  'Сырная лепёшка с ароматом трюфеля': 'cheese-flatbread',
+  'Кубдари с овощным салатом': 'kubdari',
+  'Кальцоне Birria': 'calzone',
+  'Рибай стейк': 'ribeye',
+  'Стейк из сёмги под сливочным соусом со шпинатом': 'salmon-steak',
+  'Куриное филе с брокколи и кукурузой': 'grilled-chicken',
+  'Стифадо': 'stifado',
+  'Куриный шницель с грибами': 'schnitzel',
+  'Мясо по-гречески с питой': 'greek-meat',
+  'Оджахури': 'ojakhuri',
+  'Лазанья': 'lasagna',
+  'Дорадо на гриле с брокколи и черри': 'dorado',
+  'Гирос с цыпленком': 'gyros-chicken',
+  'Мусака с баклажаном': 'moussaka',
+  'Бифтеки с копченой сметаной': 'bifteki',
+  'Медальоны из говядины с картофельным пюре': 'medallions',
+  'Баклажаны пармиджано': 'parmigiana',
+  'Сувлаки из курицы': 'souvlaki',
+  'Сувлаки из сёмги': 'salmon-souvlaki',
+  'Гирос с томленой говядиной': 'gyros',
+  'Томатная пене с оссобуко': 'penne-ossobuco',
+  'Запечённый сибас с вонголе в соусе том ям': 'sea-bass',
+  'Картофель фри': 'fries',
+  'Рис': 'rice',
+  'Картофельные дольки': 'wedges',
+  'Брокколи с пармезаном': 'broccoli',
+  'Овощи на гриле': 'grilled-veg',
+  'Кабачки на гриле': 'zucchini',
+  'Пита': 'pita',
+  'Чесночный хлеб с сыром': 'garlic-bread',
+  'Ассорти свежей выпечки': 'bread-assorti',
+  'Симит': 'simit',
+  'Тостерный хлеб': 'toast-bread',
+  'Чиабатта': 'ciabatta',
+  'Багет белый': 'baguette',
+  'Чизкейк с малиной': 'raspberry-cheesecake',
+  'Брауни с пеканом': 'brownie',
+  'Чёрный принц': 'black-prince',
+  'Синнабоны': 'cinnabon',
+  'Чизкейк': 'cheesecake',
+  'Тирамису': 'tiramisu',
+  'Десерт «Манго»': 'mango-dessert',
+  'Десерт «Кофе»': 'coffee-dessert',
+  'Мороженое Coffeeteria': 'cone',
+  'Десерт «Мишка»': 'bear-dessert',
+  'Десерт «Лимон»': 'lemon-dessert',
+  'Десерт «Chanel»': 'bag-chanel',
+  'Десерт «Hermes»': 'bag-birkin',
+};
+
+// блюда с греческим флажком в PDF-меню
+const GREEK_DISHES = new Set([
+  'Завтрак Греческое утро',
+  'Большой греческий завтрак на две персоны',
+  'Греческий салат',
+  'Салат с курицей и сыром салакис',
+  'Ассорти оливок с греческим сыром',
+  'Ассорти мезе',
+  'Ассорти гирос',
+  'Пицца Греческая',
+  'Медальоны по-гречески',
+  'Стифадо',
+  'Мясо по-гречески с питой',
+  'Гирос с цыпленком',
+  'Мусака с баклажаном',
+  'Сувлаки из курицы',
+  'Сувлаки из сёмги',
+  'Гирос с томленой говядиной',
+]);
+
+const KEY_ICON = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 9V1h8v6H5V4h2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>';
+
+/** С этого раздела в меню идут напитки. */
+const FIRST_DRINKS = 'coffee';
+
+const photoSrc = (slug) => 'img/' + slug + '.webp';
+
+const UI = {
+  ru: { kicker: 'Средиземноморская кухня', search: 'Поиск по меню', emptyTitle: 'Ничего не найдено', emptyText: 'Попробуйте другое слово или название на английском', bon: 'Приятного аппетита', selected: 'Выбранное', clear: 'Очистить', total: 'Итого', show: 'Показать официанту', hint: 'Официант оформит заказ по этому списку', service: 'Без учёта обслуживания 15%', back: 'Назад', add: 'Добавить', greek: 'Греческая кухня', sections: 'Разделы меню', food: 'Кухня', drinks: 'Напитки' },
+  kz: { kicker: 'Жерорта теңізі асханасы', search: 'Мәзірден іздеу', emptyTitle: 'Ештеңе табылмады', emptyText: 'Басқа сөзбен немесе ағылшынша іздеп көріңіз', bon: 'Ас болсын', selected: 'Таңдалғандар', clear: 'Тазалау', total: 'Барлығы', show: 'Даяшыға көрсету', hint: 'Даяшы осы тізім бойынша тапсырыс береді', service: 'Қызмет көрсету 15% есептелмеген', back: 'Артқа', add: 'Қосу', greek: 'Грек асханасы', sections: 'Мәзір бөлімдері', food: 'Асхана', drinks: 'Сусындар' },
+  en: { kicker: 'Mediterranean kitchen', search: 'Search the menu', emptyTitle: 'Nothing found', emptyText: 'Try another word or the dish name in Russian', bon: 'Enjoy your meal', selected: 'Your selection', clear: 'Clear', total: 'Total', show: 'Show to your waiter', hint: 'Your waiter will place the order from this list', service: 'Excludes 15% service charge', back: 'Back', add: 'Add', greek: 'Greek cuisine', sections: 'Menu sections', food: 'Food', drinks: 'Drinks' },
+};
+
 // ─────────────────────────────
 //  STATE
 // ─────────────────────────────
-const WHATSAPP_PHONE = '7XXXXXXXXXX'; // номер заведения для заказов, формат: 7701XXXXXXX
 
-let currentLang = localStorage.getItem('coffeeteria_lang') || 'ru';
+function store(key, value) {
+  try {
+    if (value === undefined) return localStorage.getItem(key);
+    localStorage.setItem(key, value);
+  } catch (e) { return null; }
+}
+
+let currentLang = store('coffeeteria_lang') || 'ru';
 let searchQuery = '';
+let cart = loadCart(); // [{key, name, cat, price, qty}]
 
-// ─────────────────────────────
-//  INIT
-// ─────────────────────────────
+const $ = (id) => document.getElementById(id);
+const smoothScroll = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+const t = (k) => (UI[currentLang] || UI.ru)[k];
+
 document.addEventListener('DOMContentLoaded', () => {
-  buildCategoryNav();
+  buildTabs();
   renderMenu();
   initSearch();
   initLang();
-  initScrollSpy();
   initCart();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  $('navOpen').addEventListener('click', openNav);
+  $('navClose').addEventListener('click', closeNav);
   syncLangUI();
   updateCartUI();
 });
 
 // ─────────────────────────────
-//  CATEGORY NAV
+//  NAMES
 // ─────────────────────────────
 function getCatName(cat) {
   if (currentLang === 'kz') return cat.name_kz || cat.name;
@@ -603,138 +1050,210 @@ function getItemName(item) {
   return item.name;
 }
 
-function buildCategoryNav() {
-  const nav = document.getElementById('categoryNav');
+function getItemDesc(item) {
+  if (currentLang === 'kz') return item.desc_kz || item.desc;
+  if (currentLang === 'en') return item.desc_en || item.desc;
+  return item.desc;
+}
+
+function formatNum(n) { return n.toLocaleString('ru-RU'); }
+function formatPrice(n) { return formatNum(n) + ' ₸'; }
+
+// ─────────────────────────────
+//  TABS + SCROLL SPY
+// ─────────────────────────────
+function buildTabs() {
+  const tabs = $('tabs');
+  tabs.innerHTML = '';
   menuData.forEach((cat, i) => {
     const btn = document.createElement('button');
-    btn.className = 'cat-btn' + (i === 0 ? ' active' : '');
+    btn.className = 'tab' + (i === 0 ? ' active' : '');
     btn.textContent = getCatName(cat);
     btn.dataset.id = cat.id;
-    btn.onclick = () => scrollToCategory(cat.id);
-    nav.appendChild(btn);
+    btn.onclick = () => jumpTo(cat.id);
+    tabs.appendChild(btn);
   });
 }
 
-function scrollToCategory(id) {
-  const el = document.getElementById('cat-' + id);
+function setActiveTab(id) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  const btn = document.querySelector(`.tab[data-id="${id}"]`);
+  const tabs = $('tabs');
+  if (!btn) return;
+  const b = btn.getBoundingClientRect(), r = tabs.getBoundingClientRect();
+  tabs.scrollTo({ left: tabs.scrollLeft + b.left - r.left - r.width / 2 + b.width / 2, behavior: 'smooth' });
+}
+
+// активный раздел — последний, чей верх ушёл под липкую панель;
+// внизу страницы — последний раздел, даже если он короткий
+let activeCat = null;
+function updateActiveTab() {
+  if (navLock) return;
+  const sections = [...document.querySelectorAll('.cat:not(.hidden)')];
+  if (!sections.length) return;
+  const line = $('bar').offsetHeight + 8;
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  let current = sections[0];
+  if (atBottom) current = sections[sections.length - 1];
+  else sections.forEach(el => { if (el.getBoundingClientRect().top <= line) current = el; });
+  const id = current.id.replace('cat-', '');
+  if (id !== activeCat) { activeCat = id; setActiveTab(id); }
+}
+
+// переход к разделу: вкладка сразу встаёт на цель и не «пробегает» промежуточные,
+// пока страница прокручивается
+let navLock = false, lockTimer = null;
+function releaseLockSoon(ms) {
+  clearTimeout(lockTimer);
+  lockTimer = setTimeout(() => { navLock = false; }, ms);
+}
+function jumpTo(id) {
+  const el = $('cat-' + id);
   if (!el) return;
-  const offset = 60 + 52 + 12;
-  const top = el.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: 'smooth' });
+  navLock = true;
+  activeCat = id;
+  setActiveTab(id);
+  el.scrollIntoView({ block: 'start', behavior: smoothScroll() });
+  releaseLockSoon(500);
+}
+function onScroll() {
+  if (navLock) releaseLockSoon(150); // ждём конца прокрутки
+  else updateActiveTab();
 }
 
-function initScrollSpy() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id.replace('cat-', '');
-        document.querySelectorAll('.cat-btn').forEach(b => {
-          b.classList.toggle('active', b.dataset.id === id);
-        });
-        const activeBtn = document.querySelector(`.cat-btn[data-id="${id}"]`);
-        if (activeBtn) activeBtn.scrollIntoView({ block: 'nearest', inline: 'center' });
-      }
-    });
-  }, { rootMargin: '-100px 0px -60% 0px' });
+// ─────────────────────────────
+//  ALL SECTIONS SHEET
+// ─────────────────────────────
+function countLabel(n) {
+  if (currentLang === 'en') return n + (n === 1 ? ' item' : ' items');
+  if (currentLang === 'kz') return n + ' түрі';
+  return n + ' ' + plural(n, 'позиция', 'позиции', 'позиций');
+}
 
+function plural(n, a, b, c) {
+  const m = Math.abs(n) % 100, m1 = m % 10;
+  if (m > 10 && m < 20) return c;
+  if (m1 > 1 && m1 < 5) return b;
+  if (m1 === 1) return a;
+  return c;
+}
+
+function openNav() {
+  const grid = $('navGrid');
+  grid.innerHTML = '';
   menuData.forEach(cat => {
-    const el = document.getElementById('cat-' + cat.id);
-    if (el) observer.observe(el);
+    // Кухня и напитки — подзаголовками: разделов 21, иначе где кончается еда, не видно.
+    if (cat.id === menuData[0].id || cat.id === FIRST_DRINKS) {
+      const h = document.createElement('div');
+      h.className = 'nav-heading';
+      h.textContent = t(cat.id === FIRST_DRINKS ? 'drinks' : 'food');
+      grid.appendChild(h);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-item' + (cat.id === activeCat ? ' active' : '');
+    btn.innerHTML = `<span class="nav-item-name">${getCatName(cat)}</span><span class="nav-item-count">${countLabel(cat.items.length)}</span>`;
+    btn.onclick = () => { closeNav(); jumpTo(cat.id); };
+    grid.appendChild(btn);
   });
+  $('overlay').classList.add('open');
+  $('navSheet').classList.add('open');
+}
+
+function closeNav() {
+  $('navSheet').classList.remove('open');
+  if (!$('sheet').classList.contains('open')) $('overlay').classList.remove('open');
 }
 
 // ─────────────────────────────
 //  RENDER MENU
 // ─────────────────────────────
 function renderMenu() {
-  const main = document.getElementById('mainContent');
-  const emptyState = document.getElementById('emptyState');
+  const main = $('menu');
+  const empty = $('empty');
   let totalVisible = 0;
 
-  // Remove existing sections
-  main.querySelectorAll('.cat-section').forEach(el => el.remove());
+  main.querySelectorAll('.cat').forEach(el => el.remove());
 
   menuData.forEach(cat => {
-    const items = cat.items.map((item, idx) => ({ item, idx })).filter(({ item }) => matchesSearch(item));
-    const section = document.createElement('div');
-    section.className = 'cat-section' + (items.length === 0 ? ' hidden' : '');
+    const items = cat.items.map((item, idx) => ({ item, idx })).filter(({ item }) => matchesSearch(item, cat));
+    const section = document.createElement('section');
+    section.className = 'cat' + (items.length === 0 ? ' hidden' : '');
     section.id = 'cat-' + cat.id;
-
-    const title = document.createElement('div');
-    title.className = 'cat-title';
-    title.textContent = getCatName(cat);
-    section.appendChild(title);
-
-    const list = document.createElement('div');
-    list.className = 'items-list';
+    section.innerHTML = `
+      <span class="cat-greek" lang="el" aria-hidden="true">${GREEK[cat.id] || ''}</span>
+      <h2 class="cat-name">${getCatName(cat)}</h2>
+      <ul class="dishes"></ul>`;
+    const list = section.querySelector('.dishes');
 
     items.forEach(({ item, idx }) => {
       totalVisible++;
-      const card = document.createElement('div');
-      card.className = 'item-card' + (item.photo ? ' has-photo' : '');
-
       const key = cat.id + '_' + idx;
-      const inCart = cart.some(e => e.key === key);
-      const rightHtml = `
-        <div class="item-right">
-          <div class="item-price">${formatPrice(item.price)}</div>
-          <button class="add-btn${inCart ? ' in-cart' : ''}" data-key="${key}" data-name="${item.name}" data-cat="${cat.name}" data-price="${item.price}">+</button>
-        </div>`;
-
-      if (item.photo) {
-        card.innerHTML = `
-          <img class="item-photo" src="${item.photo}" alt="${item.name}" loading="lazy">
-          <div class="item-card-body">
-            <div class="item-info">
-              <div class="item-name">${getItemName(item)}</div>
-              ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
-            </div>
-            ${rightHtml}
-          </div>`;
-      } else {
-        card.innerHTML = `
-          <div class="item-info">
-            <div class="item-name">${getItemName(item)}</div>
-            ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
-          </div>
-          ${rightHtml}`;
-      }
-      list.appendChild(card);
+      const slug = PHOTOS[item.name];
+      const photo = item.photo || (slug && photoSrc(slug));
+      const addBtn = `<button class="add" data-key="${key}" data-name="${item.name}" data-cat="${cat.name}" data-price="${item.price}"
+            aria-label="${t('add')}: ${getItemName(item)}"></button>`;
+      const tag = GREEK_DISHES.has(item.name) ? `<span class="greek-tag">${KEY_ICON}${t('greek')}</span>` : '';
+      const li = document.createElement('li');
+      li.className = 'dish' + (photo ? ' with-photo' : '');
+      li.innerHTML = `
+        ${photo ? `<button class="dish-photo" data-photo="${photo}" aria-label="${getItemName(item)}"><img src="${photo}" alt="" loading="lazy"></button>` : ''}
+        ${tag}
+        <div class="dish-line">
+          <h3 class="dish-name">${getItemName(item)}</h3>
+          <span class="leader" aria-hidden="true"></span>
+          <span class="dish-price">${formatNum(item.price)}<small>₸</small></span>
+          ${addBtn}
+        </div>
+        ${item.desc ? `<p class="dish-desc">${getItemDesc(item)}</p>` : ''}`;
+      list.appendChild(li);
     });
 
-    section.appendChild(list);
-    main.insertBefore(section, emptyState);
+    main.insertBefore(section, empty);
   });
 
-  emptyState.classList.toggle('visible', totalVisible === 0);
+  empty.classList.toggle('visible', totalVisible === 0);
+  syncAddButtons();
+  activeCat = null;
+  updateActiveTab();
 }
 
-function matchesSearch(item) {
+const PLUS = '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 1.5v11M1.5 7h11"/></svg>';
+
+function syncAddButtons() {
+  document.querySelectorAll('.add').forEach(btn => {
+    const entry = cart.find(e => e.key === btn.dataset.key);
+    btn.classList.toggle('in-cart', !!entry);
+    btn.innerHTML = entry ? entry.qty : PLUS;
+  });
+}
+
+function matchesSearch(item, cat) {
   if (!searchQuery) return true;
-  const q = searchQuery.toLowerCase();
-  return item.name.toLowerCase().includes(q) ||
-    (item.name_kz || '').toLowerCase().includes(q) ||
-    (item.name_en || '').toLowerCase().includes(q) ||
-    (item.desc || '').toLowerCase().includes(q);
-}
-
-function formatPrice(price) {
-  return price.toLocaleString('ru-RU') + ' тг';
+  const norm = (x) => (x || '').toLowerCase().replace(/ё/g, 'е');
+  // отрезаем окончание: «семга» находит «сёмги», «креветки» — «креветками»
+  const q = norm(searchQuery).split(/\s+/).map(w => w.length >= 5 ? w.replace(/[аяыиоеуюьй]$/, '') : w).join(' ');
+  return [item.name, item.name_kz, item.name_en, item.desc, item.desc_kz, item.desc_en, cat.name, cat.name_kz, cat.name_en].some(x => norm(x).includes(q));
 }
 
 // ─────────────────────────────
 //  SEARCH
 // ─────────────────────────────
 function initSearch() {
-  document.getElementById('searchToggle').addEventListener('click', () => {
-    const bar = document.getElementById('searchBar');
-    bar.classList.toggle('visible');
-    if (bar.classList.contains('visible')) {
-      document.getElementById('searchInput').focus();
-    }
+  const bar = $('bar');
+  const input = $('searchInput');
+  $('searchOpen').addEventListener('click', () => {
+    bar.classList.add('searching');
+    input.focus();
+    const top = bar.getBoundingClientRect().top + window.scrollY;
+    if (window.scrollY < top) window.scrollTo({ top });
   });
-
-  document.getElementById('searchInput').addEventListener('input', (e) => {
+  $('searchClose').addEventListener('click', () => {
+    bar.classList.remove('searching');
+    input.value = '';
+    searchQuery = '';
+    renderMenu();
+  });
+  input.addEventListener('input', (e) => {
     searchQuery = e.target.value.trim();
     renderMenu();
   });
@@ -747,37 +1266,30 @@ function initLang() {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       currentLang = btn.dataset.lang;
-      localStorage.setItem('coffeeteria_lang', currentLang);
+      store('coffeeteria_lang', currentLang);
       syncLangUI();
+      buildTabs();
       renderMenu();
-      buildCategoryNavLabels();
+      updateCartUI();
     });
   });
 }
 
 function syncLangUI() {
+  document.documentElement.lang = currentLang === 'kz' ? 'kk' : currentLang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
-  document.getElementById('searchInput').placeholder =
-    currentLang === 'en' ? 'Search menu...' : currentLang === 'kz' ? 'Мәзірден іздеу...' : 'Поиск по меню...';
-}
-
-function buildCategoryNavLabels() {
-  document.querySelectorAll('.cat-btn').forEach(btn => {
-    const cat = menuData.find(c => c.id === btn.dataset.id);
-    if (cat) btn.textContent = getCatName(cat);
-  });
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
+  $('searchInput').placeholder = t('search');
 }
 
 // ─────────────────────────────
 //  CART
 // ─────────────────────────────
-let cart = loadCart(); // [{key, name, price, qty}]
-
 function loadCart() {
-  try { return JSON.parse(localStorage.getItem('coffeeteria_cart')) || []; } catch (e) { return []; }
+  try { return JSON.parse(store('coffeeteria_cart_v3')) || []; } catch (e) { return []; }
 }
 function saveCart() {
-  localStorage.setItem('coffeeteria_cart', JSON.stringify(cart));
+  store('coffeeteria_cart_v3', JSON.stringify(cart));
 }
 
 function addToCart(key, name, price, cat) {
@@ -786,7 +1298,6 @@ function addToCart(key, name, price, cat) {
   else cart.push({ key, name, cat, price, qty: 1 });
   saveCart();
   updateCartUI();
-  renderMenu();
 }
 
 function changeQty(key, delta) {
@@ -796,7 +1307,6 @@ function changeQty(key, delta) {
   if (cart[idx].qty <= 0) cart.splice(idx, 1);
   saveCart();
   updateCartUI();
-  renderMenu();
   renderCartItems();
   if (cart.length === 0) closeCart();
 }
@@ -805,77 +1315,169 @@ function clearCart() {
   cart = [];
   saveCart();
   updateCartUI();
-  renderMenu();
   closeCart();
+  closeWaiter();
 }
 
-function sendToWhatsApp() {
-  if (cart.length === 0) return;
-  const lines = cart.map(e => `• ${e.name}${e.cat ? ' (' + e.cat + ')' : ''} ×${e.qty} — ${(e.price * e.qty).toLocaleString('ru-RU')} тг`);
-  const total = cart.reduce((s, e) => s + e.price * e.qty, 0);
-  const text = 'Заказ Coffeeteria:\n' + lines.join('\n') + '\n\nИтого: ' + total.toLocaleString('ru-RU') + ' тг';
-  window.open('https://wa.me/' + WHATSAPP_PHONE + '?text=' + encodeURIComponent(text), '_blank');
+// ключ корзины = id раздела + индекс блюда в нём
+function lookup(key) {
+  const i = key.lastIndexOf('_');
+  const cat = menuData.find(c => c.id === key.slice(0, i));
+  const item = cat && cat.items[Number(key.slice(i + 1))];
+  return item ? { cat, item, order: menuData.indexOf(cat) * 1000 + Number(key.slice(i + 1)) } : null;
+}
+
+// ─────────────────────────────
+//  WAITER SCREEN
+// ─────────────────────────────
+let wakeLock = null;
+
+function openWaiter() {
+  const entries = cart
+    .map(e => ({ ...e, ref: lookup(e.key) }))
+    .sort((a, b) => (a.ref ? a.ref.order : 1e9) - (b.ref ? b.ref.order : 1e9));
+  const list = $('waiterList');
+  list.innerHTML = '';
+  let group = null;
+  entries.forEach(e => {
+    const catName = e.ref ? e.ref.cat.name : e.cat;
+    if (catName !== group) {
+      group = catName;
+      const h = document.createElement('div');
+      h.className = 'waiter-group';
+      h.textContent = catName || '';
+      list.appendChild(h);
+    }
+    const row = document.createElement('div');
+    row.className = 'waiter-row';
+    row.innerHTML = `
+      <span class="waiter-qty">${e.qty}×</span>
+      <span class="waiter-name">${e.ref ? e.ref.item.name : e.name}</span>
+      <span class="waiter-sum">${formatPrice(e.price * e.qty)}</span>`;
+    list.appendChild(row);
+  });
+  const qty = cart.reduce((s, e) => s + e.qty, 0);
+  $('waiterSub').textContent = 'Coffeeteria · ' + qty + ' ' + plural(qty, 'позиция', 'позиции', 'позиций');
+  $('waiterTotal').textContent = formatPrice(cart.reduce((s, e) => s + e.price * e.qty, 0));
+  $('waiter').classList.add('open');
+  $('waiter').scrollTop = 0;
+  // экран не гаснет, пока официант записывает
+  navigator.wakeLock?.request('screen').then(l => { wakeLock = l; }).catch(() => {});
+}
+
+function closeWaiter() {
+  $('waiter').classList.remove('open');
+  wakeLock?.release().catch(() => {});
+  wakeLock = null;
 }
 
 function openCart() {
   renderCartItems();
-  document.getElementById('cartOverlay').classList.add('open');
-  document.getElementById('cartDrawer').classList.add('open');
+  $('overlay').classList.add('open');
+  $('sheet').classList.add('open');
 }
 
 function closeCart() {
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.getElementById('cartDrawer').classList.remove('open');
-}
-
-function plural(n, a, b, c) {
-  const m = Math.abs(n) % 100;
-  const m1 = m % 10;
-  if (m > 10 && m < 20) return c;
-  if (m1 > 1 && m1 < 5) return b;
-  if (m1 === 1) return a;
-  return c;
+  $('overlay').classList.remove('open');
+  $('sheet').classList.remove('open');
 }
 
 function updateCartUI() {
   const totalQty = cart.reduce((s, e) => s + e.qty, 0);
   const totalSum = cart.reduce((s, e) => s + e.price * e.qty, 0);
-  const fab = document.getElementById('cartFab');
-  document.getElementById('cartFabCount').textContent = totalQty + ' ' + plural(totalQty, 'позиция', 'позиции', 'позиций');
-  document.getElementById('cartFabTotal').textContent = formatPrice(totalSum);
-  if (totalQty > 0) fab.classList.add('visible');
-  else fab.classList.remove('visible');
+  $('cartCount').textContent = totalQty;
+  $('cartSum').textContent = formatPrice(totalSum);
+  $('cartBar').classList.toggle('visible', totalQty > 0);
+  syncAddButtons();
 }
 
 function renderCartItems() {
-  const container = document.getElementById('cartItems');
+  const container = $('sheetItems');
   container.innerHTML = '';
   cart.forEach(({ key, name, price, qty }) => {
-    const div = document.createElement('div');
-    div.className = 'cart-row';
-    div.innerHTML = `
-      <div class="cart-row-info">
-        <div class="cart-row-name">${name}</div>
-        <div class="cart-row-price">${formatPrice(price)} × ${qty}</div>
+    const ref = lookup(key);
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `
+      <div class="row-info">
+        <div class="row-name">${ref ? getItemName(ref.item) : name}</div>
+        <div class="row-price">${formatPrice(price)} × ${qty}</div>
       </div>
-      <div class="cart-qty">
-        <button class="qty-btn" onclick="changeQty('${key}', -1)">−</button>
+      <div class="qty">
+        <button class="qty-btn" data-key="${key}" data-delta="-1" aria-label="−1">−</button>
         <span class="qty-num">${qty}</span>
-        <button class="qty-btn" onclick="changeQty('${key}', 1)">+</button>
+        <button class="qty-btn" data-key="${key}" data-delta="1" aria-label="+1">+</button>
       </div>`;
-    container.appendChild(div);
+    container.appendChild(row);
   });
   const totalSum = cart.reduce((s, e) => s + e.price * e.qty, 0);
-  document.getElementById('cartTotalAmount').textContent = formatPrice(totalSum);
+  $('totalSum').textContent = formatPrice(totalSum);
 }
 
 function initCart() {
-  document.getElementById('mainContent').addEventListener('click', (e) => {
-    const addBtn = e.target.closest('.add-btn');
-    if (addBtn) {
-      addToCart(addBtn.dataset.key, addBtn.dataset.name, Number(addBtn.dataset.price), addBtn.dataset.cat);
-    }
+  $('menu').addEventListener('click', (e) => {
+    const thumb = e.target.closest('.dish-photo');
+    if (thumb) return openViewer(thumb);
+    const btn = e.target.closest('.add');
+    if (!btn) return;
+    addToCart(btn.dataset.key, btn.dataset.name, Number(btn.dataset.price), btn.dataset.cat);
+    btn.classList.remove('pop');
+    void btn.offsetWidth;
+    btn.classList.add('pop');
   });
+  $('sheetItems').addEventListener('click', (e) => {
+    const btn = e.target.closest('.qty-btn');
+    if (btn) changeQty(btn.dataset.key, Number(btn.dataset.delta));
+  });
+  $('cartBar').addEventListener('click', openCart);
+  $('overlay').addEventListener('click', () => { closeCart(); closeNav(); });
+  $('clearCart').addEventListener('click', clearCart);
+  $('showWaiter').addEventListener('click', openWaiter);
+  $('waiterBack').addEventListener('click', closeWaiter);
+  $('viewerAdd').addEventListener('click', () => {
+    const btn = viewerBtn;
+    if (!btn) return;
+    addToCart(btn.dataset.key, btn.dataset.name, Number(btn.dataset.price), btn.dataset.cat);
+    syncViewerAdd();
+  });
+  $('viewerClose').addEventListener('click', closeViewer);
+  $('viewer').addEventListener('click', (e) => { if (e.target.id === 'viewer') closeViewer(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if ($('waiter').classList.contains('open')) return closeWaiter();
+    closeViewer();
+    closeCart();
+    closeNav();
+  });
+}
+
+// ─────────────────────────────
+//  PHOTO VIEWER
+// ─────────────────────────────
+let viewerBtn = null; // кнопка «+» блюда, которое открыто
+
+function openViewer(thumb) {
+  const li = thumb.closest('.dish');
+  viewerBtn = li.querySelector('.add');
+  $('viewerImg').src = thumb.dataset.photo;
+  $('viewerName').textContent = li.querySelector('.dish-name').textContent;
+  $('viewerPrice').textContent = formatPrice(Number(viewerBtn.dataset.price));
+  syncViewerAdd();
+  $('viewer').classList.add('open');
+  $('viewer').focus({ preventScroll: true });
+}
+
+function closeViewer() {
+  if (!$('viewer').classList.contains('open')) return;
+  $('viewer').classList.remove('open');
+  viewerBtn?.closest('.dish')?.querySelector('.dish-photo')?.focus();
+  viewerBtn = null;
+}
+
+function syncViewerAdd() {
+  const entry = viewerBtn && cart.find(e => e.key === viewerBtn.dataset.key);
+  $('viewerAdd').innerHTML = `${PLUS.replace('<svg', '<svg width="14" height="14"')} ${t('add')}` +
+    (entry ? ` <span class="cnt">${entry.qty}</span>` : '');
 }
 </script>
 </body>

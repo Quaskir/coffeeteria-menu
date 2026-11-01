@@ -1,2 +1,7 @@
 .DS_Store
 .wrangler/
+
+# Выгрузки продаж iiko и промежуточные файлы генератора — внутренние данные
+tools/iiko-menu/*.json
+tools/iiko-menu/menu_iiko.js
+__pycache__/
